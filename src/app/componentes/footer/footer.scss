@@ -1,0 +1,16 @@
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
+
+.dato {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

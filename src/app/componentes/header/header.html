@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="alternarMenu.emit()" aria-label="Menú">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-icon>local_hospital</mat-icon>
+  <span class="titulo">Clínica Virtual</span>
+
+  <span class="espacio"></span>
+
+  @if (auth.usuario(); as usuario) {
+    <span class="nombre">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+    <mat-icon class="info" [matTooltip]="'Usuario: ' + usuario.rol">info</mat-icon>
+    <!-- La funcionalidad de notificaciones se completa en la semana 3 -->
+    <button mat-icon-button aria-label="Notificaciones">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-button (click)="auth.logout()">
+      <mat-icon>logout</mat-icon>
+      Cerrar sesión
+    </button>
+  } @else {
+    <span>Bienvenido a la clínica virtual</span>
+  }
+</mat-toolbar>

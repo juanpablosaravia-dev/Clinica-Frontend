@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contenedor {
+  flex: 1;
+}
+
+mat-sidenav {
+  width: 240px;
+}
+
+main {
+  padding: 24px;
+}

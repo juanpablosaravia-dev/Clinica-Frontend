@@ -1,0 +1,42 @@
+@if (auth.usuario(); as usuario) {
+  <mat-card class="tarjeta">
+    <mat-card-header>
+      <mat-card-title>Hola, {{ usuario.nombre }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Elegí una de las funciones del menú para comenzar.</p>
+    </mat-card-content>
+  </mat-card>
+} @else {
+  <mat-card class="tarjeta">
+    <mat-card-header>
+      <mat-card-title>Bienvenido a la clínica virtual</mat-card-title>
+      <mat-card-subtitle>Iniciá sesión o registrate para gestionar tu atención médica</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Como paciente registrado vas a poder:</p>
+      <mat-list>
+        <mat-list-item>
+          <mat-icon matListItemIcon>event_available</mat-icon>
+          <span matListItemTitle>Sacar turnos por especialidad, sede y médico</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListItemIcon>event_note</mat-icon>
+          <span matListItemTitle>Consultar y cancelar tus turnos</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListItemIcon>history</mat-icon>
+          <span matListItemTitle>Ver tu historial clínico</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListItemIcon>notifications</mat-icon>
+          <span matListItemTitle>Recibir notificaciones de tus turnos</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button routerLink="/login">Iniciar sesión</a>
+      <a mat-stroked-button routerLink="/registro">Registrarme</a>
+    </mat-card-actions>
+  </mat-card>
+}
