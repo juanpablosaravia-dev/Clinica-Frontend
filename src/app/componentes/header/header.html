@@ -1,0 +1,35 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="alternarMenu.emit()" aria-label="Abrir o cerrar el menú">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="marca">
+    <span class="cruz" aria-hidden="true"></span>
+    Clínica Virtual
+  </span>
+
+  <span class="espacio"></span>
+
+  @if (auth.usuario(); as usuario) {
+    <span class="nombre">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+    <mat-icon class="info" [matTooltip]="'Tipo de usuario: ' + usuario.rol">info</mat-icon>
+    <!-- La funcionalidad de notificaciones se completa en la semana 3 -->
+    <button mat-icon-button aria-label="Notificaciones">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-button (click)="auth.logout()" aria-label="Cerrar sesión">
+      <mat-icon>logout</mat-icon>
+      <span class="texto-salir">Cerrar sesión</span>
+    </button>
+  } @else {
+    <span class="bienvenida">Bienvenido a la clínica virtual</span>
+  }
+</mat-toolbar>
+
+<!-- Franja de señalización: indica en qué sector (rol) está el usuario -->
+@if (auth.usuario(); as usuario) {
+  <div [class]="'franja rol-' + usuario.rol">
+    <mat-icon>signpost</mat-icon>
+    {{ nombreSector[usuario.rol] }}
+  </div>
+}

@@ -1,0 +1,17 @@
+<div class="layout">
+  <app-header (alternarMenu)="menuLateral.toggle()" />
+
+  <mat-sidenav-container class="contenedor">
+    <mat-sidenav #menuLateral [mode]="esCelular ? 'over' : 'side'" [opened]="!esCelular">
+      <app-menu />
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <main>
+        <router-outlet />
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <app-footer />
+</div>

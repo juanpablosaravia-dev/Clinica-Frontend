@@ -1,0 +1,44 @@
+@if (auth.usuario(); as usuario) {
+  <!-- Con sesión: saludo con el color del sector del usuario -->
+  <section [class]="'saludo rol-' + usuario.rol">
+    <h1>Hola, {{ usuario.nombre }}</h1>
+    <p>Elegí una función del menú de la izquierda para comenzar.</p>
+  </section>
+} @else {
+  <!-- Sin sesión: invitación a ingresar o registrarse -->
+  <section class="portada">
+    <h1>Tus turnos, tu historia clínica y tus avisos, en un solo lugar.</h1>
+    <p>
+      Pedí turno con el especialista que necesitás sin llamar por teléfono ni hacer fila en la
+      sede.
+    </p>
+    <div class="acciones">
+      <a mat-flat-button routerLink="/registro">Crear cuenta</a>
+      <a mat-stroked-button routerLink="/login">Ya tengo cuenta, ingresar</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo empezar</h2>
+    <ol class="pasos">
+      @for (paso of pasos; track paso.titulo) {
+        <li>
+          <strong>{{ paso.titulo }}</strong>
+          <span>{{ paso.detalle }}</span>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section>
+    <h2>Con tu cuenta de paciente podés</h2>
+    <ul class="funciones">
+      @for (funcion of funciones; track funcion.icono) {
+        <li>
+          <mat-icon>{{ funcion.icono }}</mat-icon>
+          {{ funcion.texto }}
+        </li>
+      }
+    </ul>
+  </section>
+}

@@ -1,0 +1,96 @@
+// Colores de la barra (Material los aplica también a los botones que tiene adentro)
+mat-toolbar {
+  --mat-toolbar-container-background-color: var(--verde-quirofano);
+  --mat-toolbar-container-text-color: var(--blanco);
+  --mat-icon-button-icon-color: var(--blanco);
+  gap: 8px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+// Cruz sanitaria dibujada con CSS: un cuadrado blanco con dos barras verdes
+.cruz {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  background-color: var(--amarillo-senal);
+  border-radius: 4px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: var(--verde-quirofano);
+  }
+  &::before {
+    left: 10px;
+    top: 4px;
+    width: 6px;
+    height: 18px;
+  }
+  &::after {
+    left: 4px;
+    top: 10px;
+    width: 18px;
+    height: 6px;
+  }
+}
+
+.espacio {
+  flex: 1;
+}
+
+.nombre {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bienvenida {
+  font-size: 16px;
+  padding-right: 8px;
+}
+
+.info {
+  cursor: help;
+}
+
+// En celular no entra todo: el nombre se ve en "Mi perfil"
+@media (max-width: 600px) {
+  .nombre,
+  .bienvenida,
+  .texto-salir {
+    display: none;
+  }
+
+  mat-toolbar {
+    gap: 4px;
+    padding: 0 8px;
+  }
+
+  .marca {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 360px) {
+  .marca {
+    display: none;
+  }
+}
+
+// Franja del color del sector, debajo de la barra
+.franja {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 24px;
+  background-color: var(--color-sector);
+  color: var(--blanco);
+  font-weight: 600;
+}

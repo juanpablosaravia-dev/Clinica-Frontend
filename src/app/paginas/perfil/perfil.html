@@ -1,0 +1,33 @@
+<mat-card class="tarjeta">
+  <mat-card-header>
+    <mat-card-title>Mi perfil</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (usuario(); as usuario) {
+      <mat-list>
+        <mat-list-item>
+          <mat-icon matListItemIcon>person</mat-icon>
+          <span matListItemTitle>{{ usuario.nombre }} {{ usuario.apellido }}</span>
+          <span matListItemLine>Nombre y apellido</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListItemIcon>badge</mat-icon>
+          <span matListItemTitle>{{ usuario.dni }}</span>
+          <span matListItemLine>DNI</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListItemIcon>email</mat-icon>
+          <span matListItemTitle>{{ usuario.email }}</span>
+          <span matListItemLine>Email</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListItemIcon>info</mat-icon>
+          <span matListItemTitle>{{ usuario.rol }}</span>
+          <span matListItemLine>Tipo de usuario</span>
+        </mat-list-item>
+      </mat-list>
+    } @else {
+      <p>Cargando...</p>
+    }
+  </mat-card-content>
+</mat-card>

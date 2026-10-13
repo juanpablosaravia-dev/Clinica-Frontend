@@ -1,0 +1,26 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contenedor {
+  flex: 1;
+}
+
+// El menú lateral va sobre fondo oscuro
+mat-sidenav {
+  width: 248px;
+  --mat-sidenav-container-background-color: var(--tinta);
+  --mat-sidenav-container-shape: 0;
+}
+
+main {
+  padding: 32px;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 16px;
+  }
+}

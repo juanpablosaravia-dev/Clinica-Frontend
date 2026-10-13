@@ -1,0 +1,101 @@
+section {
+  max-width: 880px;
+  margin-bottom: 40px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+// Titular grande de la portada
+.portada {
+  h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    max-width: 20ch;
+    color: var(--verde-quirofano);
+  }
+
+  p {
+    font-size: 19px;
+    max-width: 55ch;
+    line-height: 1.5;
+  }
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+// Pasos numerados con el número dentro de una placa amarilla
+.pasos {
+  list-style: none;
+  counter-reset: paso;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+
+  li {
+    counter-increment: paso;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 3px solid var(--verde-quirofano);
+    padding-top: 12px;
+  }
+
+  li::before {
+    content: counter(paso);
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background-color: var(--amarillo-senal);
+    color: var(--tinta);
+    font-weight: 800;
+    font-size: 22px;
+  }
+
+  strong {
+    font-size: 18px;
+  }
+}
+
+.funciones {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px 32px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  mat-icon {
+    color: var(--verde-quirofano);
+  }
+}
+
+// Saludo con sesión: borde del color del sector
+.saludo {
+  border-left: 8px solid var(--color-sector);
+  padding: 8px 0 8px 24px;
+
+  h1 {
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 19px;
+  }
+}
