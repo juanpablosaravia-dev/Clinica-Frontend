@@ -1,3 +1,21 @@
+// Menú oscuro tipo cartel de pasillo: texto e íconos claros
+mat-nav-list {
+  --mat-list-list-item-label-text-color: var(--blanco);
+  --mat-list-list-item-leading-icon-color: #9fc9c2;
+  --mat-list-list-item-hover-label-text-color: var(--blanco);
+  --mat-list-list-item-label-text-weight: 600;
+  padding: 12px 8px;
+}
+
+a {
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+// Opción actual: placa amarilla, como el cartel que indica dónde estás
 .activo {
-  background-color: var(--mat-sys-secondary-container);
+  background-color: var(--amarillo-senal);
+  --mat-list-list-item-label-text-color: var(--tinta);
+  --mat-list-list-item-hover-label-text-color: var(--tinta);
+  --mat-list-list-item-leading-icon-color: var(--tinta);
 }

@@ -1,65 +1,133 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+
+// Identidad visual: señalética de hospital.
+// Cada rol es un "sector" con su propio color, como los carteles de pasillo.
+:root {
+  --verde-quirofano: #0e4f4a;
+  --tinta: #15302c;
+  --amarillo-senal: #f2c230;
+  --fondo: #eef3f1;
+  --blanco: #ffffff;
+
+  // Colores de cada sector (rol)
+  --sector-paciente: #1f7a70;
+  --sector-medico: #2e5eaa;
+  --sector-operador: #c77d12;
+  --sector-admin: #6b3fa0;
+}
 
 html {
   height: 100%;
   @include mat.theme(
     (
       color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
+        primary: mat.$cyan-palette,
+        tertiary: mat.$yellow-palette,
       ),
-      typography: Roboto,
+      typography: 'Atkinson Hyperlegible Next',
       density: 0,
     )
   );
+
+  // Pisamos algunos colores del tema de Material con los nuestros
+  --mat-sys-primary: var(--verde-quirofano);
+  --mat-sys-on-primary: var(--blanco);
+  --mat-sys-surface: var(--fondo);
+  --mat-sys-on-surface: var(--tinta);
+  --mat-sys-surface-container-low: var(--blanco);
+  --mat-sys-primary-container: #cfe5e0;
+  --mat-sys-on-primary-container: var(--tinta);
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
   color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
+  font: var(--mat-sys-body-large);
   margin: 0;
   height: 100%;
 }
-/* You can add global styles to this file, and also import other style files */
 
-// Tarjeta centrada que usan todas las páginas
+h1,
+h2 {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+
+// Clase de color para cada sector: se usa en la franja del header y en el inicio
+.rol-paciente {
+  --color-sector: var(--sector-paciente);
+}
+.rol-medico {
+  --color-sector: var(--sector-medico);
+}
+.rol-operador {
+  --color-sector: var(--sector-operador);
+}
+.rol-admin {
+  --color-sector: var(--sector-admin);
+}
+
+// Tarjeta centrada que usan las páginas
 .tarjeta {
   max-width: 640px;
   margin: 0 auto;
 }
 
-// Los formularios muestran un campo debajo del otro
-.formulario mat-card-content {
-  display: flex;
-  flex-direction: column;
-  padding-top: 16px;
+// Formularios (login y registro): ficha con una banda verde arriba
+.formulario {
+  overflow: hidden;
+
+  mat-card-header {
+    background-color: var(--verde-quirofano);
+    color: var(--blanco);
+    padding: 20px 24px;
+  }
+
+  mat-card-title {
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  mat-card-subtitle {
+    color: #cfe5e0;
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+    gap: 8px;
+  }
+
+  mat-card-actions {
+    padding: 0 16px 20px;
+    gap: 8px;
+  }
 }
 
 // Páginas de aviso: en construcción, acceso denegado y no encontrada
 .aviso {
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
   padding: 32px;
 }
 
-.icono-grande {
-  font-size: 64px;
-  width: 64px;
-  height: 64px;
+// Ícono dentro de una placa amarilla, como un cartel de señalización
+.placa {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  background-color: var(--amarillo-senal);
+  color: var(--tinta);
+  margin-bottom: 16px;
+
+  mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+  }
 }

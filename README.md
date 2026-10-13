@@ -65,6 +65,19 @@ src/
   responde `401` (token vencido o inválido) se cierra la sesión y se va al login.
 - **Cerrar sesión**: borra el token y el usuario y vuelve a la pantalla principal.
 
+## Diseño
+
+La idea visual es la **señalética de un hospital**: cada rol es un "sector" con su color, como los
+carteles de los pasillos. Debajo del header aparece una franja con el color del sector del usuario
+logueado, y en el menú la opción actual se marca con una placa amarilla.
+
+- Colores definidos una sola vez como variables CSS en `src/styles.scss` (verde quirófano
+  `#0E4F4A`, tinta `#15302C`, amarillo señal `#F2C230`), y un color por rol
+  (`.rol-paciente`, `.rol-medico`, `.rol-operador`, `.rol-admin`).
+- Tipografía **Atkinson Hyperlegible Next**, pensada para máxima legibilidad.
+- Todos los componentes son de Angular Material; los colores se cambian pisando sus variables
+  (`--mat-sys-primary`, `--mat-toolbar-container-background-color`, etc.).
+
 ## Rutas y roles
 
 | Ruta | Acceso |

@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [RouterLink, MatCardModule, MatButtonModule, MatIconModule],
   template: `
     <mat-card class="tarjeta aviso">
-      <mat-icon class="icono-grande">construction</mat-icon>
+      <div class="placa"><mat-icon>construction</mat-icon></div>
       <h2>En construcción</h2>
       <p>Esta sección va a estar disponible próximamente.</p>
       <a mat-flat-button routerLink="/">Volver al inicio</a>

@@ -60,7 +60,7 @@ export class Registro implements OnInit {
 
     this.auth.registrar(this.formulario.getRawValue()).subscribe({
       next: () => {
-        this.snackBar.open('Registro exitoso. Ya podés iniciar sesión', 'Cerrar', {
+        this.snackBar.open('Cuenta creada. Ya podés ingresar con tu DNI', 'Cerrar', {
           duration: 4000,
         });
         this.router.navigate(['/login']);

@@ -11,4 +11,7 @@ import { Footer } from './componentes/footer/footer';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {}
+export class App {
+  // En pantallas chicas el menú arranca cerrado y se abre por encima del contenido.
+  esCelular = window.innerWidth < 768;
+}

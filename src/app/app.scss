@@ -8,10 +8,19 @@
   flex: 1;
 }
 
+// El menú lateral va sobre fondo oscuro
 mat-sidenav {
-  width: 240px;
+  width: 248px;
+  --mat-sidenav-container-background-color: var(--tinta);
+  --mat-sidenav-container-shape: 0;
 }
 
 main {
-  padding: 24px;
+  padding: 32px;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 16px;
+  }
 }

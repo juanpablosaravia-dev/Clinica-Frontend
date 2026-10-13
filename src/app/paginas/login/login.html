@@ -1,6 +1,7 @@
 <mat-card class="tarjeta formulario">
   <mat-card-header>
     <mat-card-title>Iniciar sesión</mat-card-title>
+    <mat-card-subtitle>Ingresá con tu DNI y tu contraseña</mat-card-subtitle>
   </mat-card-header>
 
   <form [formGroup]="formulario" (ngSubmit)="ingresar()">
@@ -27,7 +28,7 @@
 
     <mat-card-actions>
       <button mat-flat-button type="submit">Ingresar</button>
-      <a mat-button routerLink="/registro">No tengo cuenta, registrarme</a>
+      <a mat-button routerLink="/registro">Crear cuenta</a>
     </mat-card-actions>
   </form>
 </mat-card>

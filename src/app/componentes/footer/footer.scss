@@ -1,16 +1,25 @@
 footer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 16px;
-  background-color: var(--mat-sys-primary-container);
-  color: var(--mat-sys-on-primary-container);
+  padding: 20px 24px;
+  background-color: var(--tinta);
+  color: var(--blanco);
+  border-top: 4px solid var(--amarillo-senal);
 }
 
 .dato {
   display: flex;
   align-items: center;
   gap: 8px;
+
+  mat-icon {
+    color: var(--amarillo-senal);
+  }
+}
+
+a {
+  --mat-button-text-label-text-color: var(--blanco);
 }

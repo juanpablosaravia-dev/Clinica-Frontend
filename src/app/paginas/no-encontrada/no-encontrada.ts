@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [RouterLink, MatCardModule, MatButtonModule, MatIconModule],
   template: `
     <mat-card class="tarjeta aviso">
-      <mat-icon class="icono-grande">search_off</mat-icon>
+      <div class="placa"><mat-icon>search_off</mat-icon></div>
       <h2>Página no encontrada</h2>
       <p>La dirección que ingresaste no existe.</p>
       <a mat-flat-button routerLink="/">Volver al inicio</a>

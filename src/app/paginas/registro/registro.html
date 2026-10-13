@@ -1,6 +1,7 @@
 <mat-card class="tarjeta formulario">
   <mat-card-header>
-    <mat-card-title>Registro de paciente</mat-card-title>
+    <mat-card-title>Crear cuenta de paciente</mat-card-title>
+    <mat-card-subtitle>Con tu cuenta vas a poder sacar turnos y ver tu historial</mat-card-subtitle>
   </mat-card-header>
 
   <form [formGroup]="formulario" (ngSubmit)="registrar()">
@@ -69,8 +70,8 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-flat-button type="submit">Registrarme</button>
-      <a mat-button routerLink="/login">Ya tengo cuenta</a>
+      <button mat-flat-button type="submit">Crear cuenta</button>
+      <a mat-button routerLink="/login">Ya tengo cuenta, ingresar</a>
     </mat-card-actions>
   </form>
 </mat-card>

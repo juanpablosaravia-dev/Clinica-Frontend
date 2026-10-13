@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [RouterLink, MatCardModule, MatButtonModule, MatIconModule],
   template: `
     <mat-card class="tarjeta aviso">
-      <mat-icon class="icono-grande">block</mat-icon>
+      <div class="placa"><mat-icon>block</mat-icon></div>
       <h2>Acceso denegado</h2>
       <p>No tenés permisos para ver esta sección.</p>
       <a mat-flat-button routerLink="/">Volver al inicio</a>
