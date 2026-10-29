@@ -18,9 +18,9 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 Chart.register(...registerables);
 
 // Colores de los gráficos: los mismos de la identidad visual de la app
-// (verde de la marca, amarillo de señalización y los colores de cada sector).
+// (azul de la marca, amarillo de señalización y los colores de cada sector).
 // Chart.js los usa en orden: una barra o una porción de torta por color.
-const COLORES = ['#1f7a70', '#f2c230', '#2e5eaa', '#c77d12', '#6b3fa0', '#0e4f4a'];
+const COLORES = ['#1f7a70', '#f2c230', '#2e5eaa', '#c77d12', '#6b3fa0', '#14284b'];
 
 // Dashboard de reportes (admin). Un filtro de fechas actualiza los cuatro indicadores a la vez.
 // Gráficos con la librería Chart.js: turnos por especialidad (barras) y por sede (torta).

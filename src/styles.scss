@@ -3,16 +3,16 @@
 // Identidad visual: señalética de hospital.
 // Cada rol es un "sector" con su propio color, como los carteles de pasillo.
 :root {
-  --verde-quirofano: #0e4f4a;
-  --tinta: #15302c;
+  --azul-marino: #14284b;
+  --tinta: #0f1a30;
   --amarillo-senal: #f2c230;
-  --fondo: #e8f0ed;
+  --fondo: #e8edf5;
   --blanco: #ffffff;
-  // Tonos claros de la misma familia verde, para tablas, bordes y selecciones
-  --verde-suave: #dcebe6;
-  --verde-hover: #f1f7f5;
-  --borde: #cfdcd8;
-  --texto-secundario: #52675f;
+  // Tonos claros de la misma familia azul, para tablas, bordes y selecciones
+  --azul-suave: #dce4f0;
+  --azul-hover: #f2f5fa;
+  --borde: #cdd5e2;
+  --texto-secundario: #525f78;
 
   // Colores de cada sector (rol)
   --sector-paciente: #1f7a70;
@@ -26,7 +26,7 @@ html {
   @include mat.theme(
     (
       color: (
-        primary: mat.$cyan-palette,
+        primary: mat.$blue-palette,
         tertiary: mat.$yellow-palette,
       ),
       typography: 'Atkinson Hyperlegible Next',
@@ -37,9 +37,9 @@ html {
   // Pisamos algunos colores del tema de Material con los nuestros.
   // Las variables --mat-sys-* son las que usan TODOS los componentes de Material,
   // así que cambiándolas acá se actualizan botones, tablas, menús, stepper, etc.
-  --mat-sys-primary: var(--verde-quirofano);
+  --mat-sys-primary: var(--azul-marino);
   --mat-sys-on-primary: var(--blanco);
-  --mat-sys-primary-container: #cfe5e0;
+  --mat-sys-primary-container: #d3dcee;
   --mat-sys-on-primary-container: var(--tinta);
 
   // "Superficie" = el fondo de tablas, paneles, stepper, menús y diálogos: blanco,
@@ -51,13 +51,13 @@ html {
   --mat-sys-surface-container-low: var(--blanco);
   --mat-sys-surface-container: var(--blanco);
   --mat-sys-surface-container-high: var(--blanco);
-  --mat-sys-surface-container-highest: var(--verde-suave);
+  --mat-sys-surface-container-highest: var(--azul-suave);
 
-  // Opción elegida en listas y selects, y bordes/divisores: misma familia verde
-  // (sin esto Material usa los tonos cian del tema base).
-  --mat-sys-secondary-container: var(--verde-suave);
+  // Opción elegida en listas y selects, y bordes/divisores: misma familia azul
+  // (sin esto Material usa los tonos del tema base).
+  --mat-sys-secondary-container: var(--azul-suave);
   --mat-sys-on-secondary-container: var(--tinta);
-  --mat-sys-outline: #7d918b;
+  --mat-sys-outline: #7c879c;
   --mat-sys-outline-variant: var(--borde);
 }
 
@@ -98,12 +98,12 @@ h2 {
   margin: 0 auto;
 }
 
-// Formularios (login y registro): ficha con una banda verde arriba
+// Formularios (login y registro): ficha con una banda azul arriba
 .formulario {
   overflow: hidden;
 
   mat-card-header {
-    background-color: var(--verde-quirofano);
+    background-color: var(--azul-marino);
     color: var(--blanco);
     padding: 20px 24px;
   }
@@ -114,7 +114,7 @@ h2 {
   }
 
   mat-card-subtitle {
-    color: #cfe5e0;
+    color: #d3dcee;
   }
 
   mat-card-content {
@@ -158,16 +158,16 @@ h2 {
     width: 100%;
   }
 
-  // Encabezado de las tablas con un tinte verde, para separarlo de los datos
+  // Encabezado de las tablas con un tinte azul, para separarlo de los datos
   .tabla .mat-mdc-header-row {
-    background-color: var(--verde-suave);
+    background-color: var(--azul-suave);
   }
   .tabla .mat-mdc-header-cell {
     font-weight: 700;
     color: var(--tinta);
   }
   .tabla .mat-mdc-row:hover {
-    background-color: var(--verde-hover);
+    background-color: var(--azul-hover);
   }
 
   // Columna de botones (editar / eliminar) pegada a la derecha
@@ -215,7 +215,7 @@ h2 {
   cursor: pointer;
 
   &:hover {
-    background-color: var(--verde-hover);
+    background-color: var(--azul-hover);
   }
 
   &.seleccionada {
@@ -274,8 +274,8 @@ h2 {
 .historial {
   margin-top: 12px;
   padding: 12px 16px;
-  border-left: 4px solid var(--verde-quirofano);
-  background-color: var(--verde-hover);
+  border-left: 4px solid var(--azul-marino);
+  background-color: var(--azul-hover);
 
   h4 {
     display: flex;
@@ -390,7 +390,7 @@ h2 {
     display: block;
     font-size: 40px;
     font-weight: 800;
-    color: var(--verde-quirofano);
+    color: var(--azul-marino);
   }
   .etiqueta {
     color: var(--texto-secundario);
