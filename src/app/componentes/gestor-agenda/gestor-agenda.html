@@ -1,5 +1,7 @@
+<!-- Rangos horarios de UN médico en UNA fecha (los recibe por input() desde la página padre) -->
 <div class="encabezado-seccion">
   <h3>Rangos horarios</h3>
+  <!-- Abre el diálogo de alta. Se puede cargar más de un rango por día. -->
   <button mat-flat-button (click)="agregar()">
     <mat-icon>add</mat-icon>
     Agregar rango
@@ -17,6 +19,7 @@
       <td mat-cell *matCellDef="let rango">{{ rango.hora_entrada }} a {{ rango.hora_salida }}</td>
     </ng-container>
 
+    <!-- El backend ya manda los nombres de especialidad y sede, no hace falta buscarlos por id -->
     <ng-container matColumnDef="especialidad">
       <th mat-header-cell *matHeaderCellDef>Especialidad</th>
       <td mat-cell *matCellDef="let rango">{{ rango.especialidad }}</td>
@@ -27,6 +30,8 @@
       <td mat-cell *matCellDef="let rango">{{ rango.sede }}</td>
     </ng-container>
 
+    <!-- Modificar abre el mismo diálogo que el alta, con los datos del rango.
+         Si el backend lo rechaza (turnos confirmados afuera, superposición) se muestra su mensaje. -->
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let rango" class="acciones">

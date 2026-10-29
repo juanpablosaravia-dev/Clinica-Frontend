@@ -5,6 +5,8 @@
       <mat-card-subtitle>El rango de fechas actualiza todos los indicadores a la vez</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+      <!-- Un solo rango de fechas para los cuatro indicadores: actualizar() los pide todos
+           juntos con forkJoin (ver reporte.service.ts). Sin fechas = todo el período. -->
       <form class="fila-filtros" [formGroup]="filtros" (ngSubmit)="actualizar()">
         <mat-form-field appearance="outline">
           <mat-label>Desde</mat-label>

@@ -6,6 +6,8 @@ import { RespuestaApi } from '../modelos/respuesta-api';
 import { DatosAtencion, DatosTurno, RegistroHistorial, Turno } from '../modelos/turno';
 import { NotificacionService } from './notificacion.service';
 
+// Turnos: alta, cancelación, atención y los listados de cada rol.
+// Qué turnos puede ver o tocar cada usuario lo decide el backend según el token.
 @Injectable({ providedIn: 'root' })
 export class TurnoService {
   private http = inject(HttpClient);

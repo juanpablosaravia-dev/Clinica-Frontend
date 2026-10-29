@@ -4,6 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../servicios/auth.service';
 
+// Pantalla principal. Sin sesión invita a ingresar o registrarse y cuenta qué puede
+// hacer un paciente; con sesión invita a elegir una opción del menú.
+// Las listas de abajo se recorren con @for en inicio.html (así no se repite HTML).
 @Component({
   selector: 'app-inicio',
   imports: [RouterLink, MatButtonModule, MatIconModule],

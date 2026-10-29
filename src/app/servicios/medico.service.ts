@@ -5,6 +5,9 @@ import { environment } from '../../environments/environment';
 import { Medico } from '../modelos/medico';
 import { RespuestaApi } from '../modelos/respuesta-api';
 
+// Listado de médicos con sus especialidades (cualquier rol con sesión).
+// Lo usan: el paciente y el operador al pedir un turno, el operador para "Nueva agenda"
+// y la agenda del médico para saber qué especialidades puede elegir.
 @Injectable({ providedIn: 'root' })
 export class MedicoService {
   private http = inject(HttpClient);

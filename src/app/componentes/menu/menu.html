@@ -1,4 +1,7 @@
 <mat-nav-list>
+  <!-- routerLink navega sin recargar la página.
+       routerLinkActive agrega la clase "activo" cuando estamos en esa ruta (así se resalta).
+       exact: true hace que "Inicio" solo se marque en "/" y no en todas las rutas. -->
   <a mat-list-item routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }">
     <mat-icon matListItemIcon>home</mat-icon>
     <span matListItemTitle>Inicio</span>
@@ -9,6 +12,8 @@
       <mat-icon matListItemIcon>person</mat-icon>
       <span matListItemTitle>Mi perfil</span>
     </a>
+    <!-- opciones() es un computed de menu.ts: devuelve las opciones del rol logueado.
+         track indica qué identifica a cada opción, para que Angular no redibuje todo. -->
     @for (opcion of opciones(); track opcion.ruta) {
       <a mat-list-item [routerLink]="opcion.ruta" routerLinkActive="activo">
         <mat-icon matListItemIcon>{{ opcion.icono }}</mat-icon>
@@ -16,6 +21,7 @@
       </a>
     }
   } @else {
+    <!-- Sin sesión solo se ofrece entrar o registrarse -->
     <a mat-list-item routerLink="/login" routerLinkActive="activo">
       <mat-icon matListItemIcon>login</mat-icon>
       <span matListItemTitle>Iniciar sesión</span>

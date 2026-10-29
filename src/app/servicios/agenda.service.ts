@@ -12,6 +12,10 @@ export interface FiltrosAgenda {
   id_medico?: number;
 }
 
+// Agenda médica (rangos horarios) y consulta de disponibilidad para pedir turnos.
+// Las reglas (quién puede tocar qué agenda, superposiciones, turnos confirmados)
+// las valida el backend; si algo no se permite responde 403 o 409 con el motivo
+// y la pantalla lo muestra.
 @Injectable({ providedIn: 'root' })
 export class AgendaService {
   private http = inject(HttpClient);
@@ -35,6 +39,7 @@ export class AgendaService {
       .pipe(map((respuesta) => respuesta.datos));
   }
 
+  // Si el médico ya tiene otro rango ese día que se cruza con este (en cualquier sede), responde 409.
   crear(datos: DatosAgenda): Observable<Agenda> {
     return this.http
       .post<RespuestaApi<Agenda>>(this.url, datos)

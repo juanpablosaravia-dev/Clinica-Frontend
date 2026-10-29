@@ -13,10 +13,14 @@
         </mat-select>
       </mat-form-field>
       <div class="botones-paso">
+        <!-- matStepperNext / matStepperPrevious mueven el stepper sin escribir código.
+             type="button" evita que el botón envíe el formulario. -->
         <button mat-flat-button matStepperNext type="button">Siguiente</button>
       </div>
     </mat-step>
 
+    <!-- En cada paso, al elegir una opción se llama a alCambiar...(): limpia los pasos
+         siguientes y le pide al backend las opciones del próximo paso. -->
     <mat-step [stepControl]="formulario.controls.id_sede" label="Sede">
       @if (sedeFija()) {
         <!-- Para el operador la sede es siempre la suya: no se puede cambiar -->
@@ -113,6 +117,8 @@
         }
       </mat-form-field>
 
+      <!-- Resumen antes de confirmar: los nombres salen de las listas ya cargadas
+           (nombreEspecialidad(), nombreMedico(), nombreSede()) y la cobertura viene del padre. -->
       <h3>Resumen del turno</h3>
       <mat-list class="resumen">
         <mat-list-item>
