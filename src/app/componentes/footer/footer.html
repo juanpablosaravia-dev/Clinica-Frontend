@@ -1,25 +1,30 @@
-<!-- Datos de contacto: dirección de la sede, teléfono, correo y redes sociales -->
+<!-- Datos de contacto de la clínica (los pide la consigna): dirección, teléfono, correo y redes. -->
 <footer>
-  <div class="dato">
-    <mat-icon>location_on</mat-icon>
-    <span>Sede Centro: San Martín 123, Santa Fe</span>
+  <span class="marca">© Clínica Virtual</span>
+
+  <div class="datos">
+    <span class="dato">
+      <mat-icon>location_on</mat-icon>
+      Sede Centro: San Martín 123, Santa Fe
+    </span>
+    <span class="dato">
+      <mat-icon>phone</mat-icon>
+      (342) 400-0001
+    </span>
+    <span class="dato">
+      <mat-icon>email</mat-icon>
+      <!-- &#64; es el carácter "@": en los templates de Angular la @ sola se reserva para @if, @for, etc. -->
+      contacto&#64;clinicavirtual.com
+    </span>
   </div>
-  <div class="dato">
-    <mat-icon>phone</mat-icon>
-    <span>(342) 400-0001</span>
-  </div>
-  <div class="dato">
-    <mat-icon>email</mat-icon>
-    <!-- &#64; es el carácter "@": en los templates de Angular la @ sola se reserva para @if, @for, etc. -->
-    <span>contacto&#64;clinicavirtual.com</span>
-  </div>
-  <div class="dato">
-    <!-- target="_blank" abre la red social en otra pestaña -->
-    <a mat-button href="https://www.instagram.com" target="_blank">
-      <mat-icon>photo_camera</mat-icon> Instagram
+
+  <!-- Redes como botones de ícono. target="_blank" las abre en otra pestaña. -->
+  <div class="redes">
+    <a mat-icon-button href="https://www.instagram.com" target="_blank" aria-label="Instagram" title="Instagram">
+      <mat-icon>photo_camera</mat-icon>
     </a>
-    <a mat-button href="https://www.facebook.com" target="_blank">
-      <mat-icon>thumb_up</mat-icon> Facebook
+    <a mat-icon-button href="https://www.facebook.com" target="_blank" aria-label="Facebook" title="Facebook">
+      <mat-icon>thumb_up</mat-icon>
     </a>
   </div>
 </footer>
