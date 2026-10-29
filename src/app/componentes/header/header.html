@@ -1,4 +1,5 @@
 <mat-toolbar>
+  <!-- (click) es un "event binding": cuando se hace click, emitimos el evento alternarMenu -->
   <button mat-icon-button (click)="alternarMenu.emit()" aria-label="Abrir o cerrar el menú">
     <mat-icon>menu</mat-icon>
   </button>
@@ -12,11 +13,48 @@
 
   @if (auth.usuario(); as usuario) {
     <span class="nombre">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+    <!-- [matTooltip]="..." es un "property binding": le pasa a la propiedad el valor calculado -->
     <mat-icon class="info" [matTooltip]="'Tipo de usuario: ' + usuario.rol">info</mat-icon>
-    <!-- La funcionalidad de notificaciones se completa en la semana 3 -->
-    <button mat-icon-button aria-label="Notificaciones">
+
+    <!-- Campana: el número rojo (badge) es la cantidad de no leídas.
+         [matBadgeHidden] lo oculta cuando no hay ninguna.
+         [matMenuTriggerFor] abre el menú desplegable de abajo al hacer click. -->
+    <button
+      mat-icon-button
+      aria-label="Notificaciones"
+      [matMenuTriggerFor]="menuNotificaciones"
+      [matBadge]="notificacionService.noLeidas()"
+      [matBadgeHidden]="notificacionService.noLeidas() === 0"
+      matBadgeColor="warn"
+    >
       <mat-icon>notifications</mat-icon>
     </button>
+
+    <!-- #menuNotificaciones es una variable del template: la usa el botón de arriba -->
+    <mat-menu #menuNotificaciones="matMenu" class="menu-notificaciones">
+      @for (notificacion of notificacionService.notificaciones(); track notificacion.id) {
+        <!-- [class.no-leida] agrega la clase CSS solo si la condición es verdadera -->
+        <div class="notificacion" [class.no-leida]="!notificacion.leida">
+          <div class="texto">
+            <span>{{ notificacion.mensaje }}</span>
+            <small>{{ notificacion.fecha | date: 'dd/MM/yyyy HH:mm' }}</small>
+          </div>
+          @if (!notificacion.leida) {
+            <button
+              mat-icon-button
+              matTooltip="Marcar como leída"
+              (click)="marcarLeida(notificacion, $event)"
+            >
+              <mat-icon>done</mat-icon>
+            </button>
+          }
+        </div>
+      } @empty {
+        <!-- @empty se muestra cuando la lista del @for está vacía -->
+        <p class="sin-notificaciones">No tenés notificaciones.</p>
+      }
+    </mat-menu>
+
     <button mat-button (click)="auth.logout()" aria-label="Cerrar sesión">
       <mat-icon>logout</mat-icon>
       <span class="texto-salir">Cerrar sesión</span>

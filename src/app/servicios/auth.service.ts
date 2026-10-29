@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, map, switchMap, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { RespuestaApi } from '../modelos/respuesta-api';
-import { DatosRegistro, Rol, Usuario } from '../modelos/usuario';
+import { DatosMisDatos, DatosRegistro, Rol, Usuario } from '../modelos/usuario';
 
 const CLAVE_TOKEN = 'token';
 const CLAVE_USUARIO = 'usuario';
@@ -45,6 +45,18 @@ export class AuthService {
     return this.http
       .get<RespuestaApi<Usuario>>(`${this.url}/perfil`)
       .pipe(map((respuesta) => respuesta.datos));
+  }
+
+  // PUT /auth/perfil: el paciente actualiza email, contraseña, teléfono y cobertura.
+  // Si sale bien, se actualiza también el usuario guardado (el header usa sus datos).
+  actualizarMisDatos(datos: DatosMisDatos): Observable<Usuario> {
+    return this.http.put<RespuestaApi<Usuario>>(`${this.url}/perfil`, datos).pipe(
+      map((respuesta) => respuesta.datos),
+      tap((usuario) => {
+        localStorage.setItem(CLAVE_USUARIO, JSON.stringify(usuario));
+        this.usuario.set(usuario);
+      }),
+    );
   }
 
   logout(): void {

@@ -1,0 +1,142 @@
+<div class="pagina">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Agenda y turnos</mat-card-title>
+      <mat-card-subtitle>Médicos con agenda para la fecha y sede elegidas</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="fila-filtros">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha</mat-label>
+          <input matInput type="date" #campoFecha [value]="fecha()" (change)="cambiarFecha(campoFecha.value)" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Sede</mat-label>
+          <mat-select [value]="sedeFiltro()" (selectionChange)="cambiarSede($event.value)">
+            @for (sede of sedes(); track sede.id) {
+              <mat-option [value]="sede.id">{{ sede.nombre }}{{ sede.id === miSede ? ' (mi sede)' : '' }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- "Nueva agenda" solo en la sede del operador -->
+        @if (esMiSede()) {
+          @if (eligiendoMedico()) {
+            <mat-form-field appearance="outline">
+              <mat-label>Elegí el médico</mat-label>
+              <mat-select (selectionChange)="nuevaAgenda($event.value)">
+                @for (medico of medicos(); track medico.id) {
+                  <mat-option [value]="medico.id">{{ medico.apellido }}, {{ medico.nombre }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          } @else {
+            <button mat-flat-button (click)="eligiendoMedico.set(true)">
+              <mat-icon>add</mat-icon>
+              Nueva agenda
+            </button>
+          }
+        }
+      </div>
+
+      @if (!esMiSede()) {
+        <p class="aviso-solo-lectura">
+          <mat-icon>visibility</mat-icon>
+          Estás consultando otra sede: solo podés modificar la agenda y los turnos de tu sede.
+        </p>
+      }
+
+      @if (cargando()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+
+      @if (agenda().length > 0) {
+        <table mat-table [dataSource]="agenda()" class="tabla">
+          <ng-container matColumnDef="medico">
+            <th mat-header-cell *matHeaderCellDef>Médico</th>
+            <td mat-cell *matCellDef="let fila">{{ fila.apellido_medico }}, {{ fila.nombre_medico }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="especialidad">
+            <th mat-header-cell *matHeaderCellDef>Especialidad</th>
+            <td mat-cell *matCellDef="let fila">{{ fila.especialidad }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="horario">
+            <th mat-header-cell *matHeaderCellDef>Horario de atención</th>
+            <td mat-cell *matCellDef="let fila">{{ fila.hora_entrada }} a {{ fila.hora_salida }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let fila" class="acciones">
+              @if (esMiSede()) {
+                <button mat-icon-button matTooltip="Editar agenda" (click)="editarAgenda(fila)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Ver turnos confirmados" (click)="verTurnos(fila)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              }
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+          <tr mat-row *matRowDef="let fila; columns: columnas"></tr>
+        </table>
+      } @else if (!cargando()) {
+        <p class="vacio">No hay médicos con agenda para esta fecha y sede.</p>
+      }
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Panel del lápiz / "Nueva agenda": el componente reutilizable con la sede fija -->
+  @if (medicoEnEdicion(); as medico) {
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Agenda de {{ medico.nombre }}</mat-card-title>
+        <button mat-icon-button class="boton-cerrar" matTooltip="Cerrar" (click)="cerrarPaneles()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <app-gestor-agenda
+          [idMedico]="medico.id"
+          [fecha]="fecha()"
+          [sedeFija]="miSede"
+          [idSedePreseleccionada]="miSede"
+          (cambio)="alCambiarAgenda()"
+        />
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Panel del ojo: turnos confirmados del médico en esa fecha -->
+  @if (medicoTurnos(); as medico) {
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Turnos confirmados de {{ medico.nombre }}</mat-card-title>
+        <button mat-icon-button class="boton-cerrar" matTooltip="Cerrar" (click)="cerrarPaneles()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        @for (turno of turnos(); track turno.id) {
+          <div class="fila-turno">
+            <strong>{{ turno.hora }} hs</strong>
+            <span>{{ turno.apellido_paciente }}, {{ turno.nombre_paciente }}</span>
+            <span class="nota">{{ turno.nota }}</span>
+            <button mat-button (click)="cancelarTurno(turno)">
+              <mat-icon>event_busy</mat-icon>
+              Cancelar
+            </button>
+          </div>
+        } @empty {
+          <p class="vacio">No hay turnos confirmados.</p>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

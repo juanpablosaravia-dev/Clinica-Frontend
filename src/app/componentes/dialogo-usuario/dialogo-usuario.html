@@ -1,0 +1,104 @@
+<h2 mat-dialog-title>{{ usuario ? 'Editar usuario' : 'Nuevo usuario' }}</h2>
+
+<form [formGroup]="formulario" (ngSubmit)="guardar()">
+  <mat-dialog-content class="campos-dialogo">
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de usuario</mat-label>
+      <!-- En la edición el rol no se cambia: solo se ofrece el rol actual del usuario -->
+      <mat-select formControlName="rol">
+        @if (usuario) {
+          <mat-option [value]="usuario.rol">{{ usuario.rol }}</mat-option>
+        } @else {
+          @for (rol of rolesAlta; track rol) {
+            <mat-option [value]="rol">{{ rol }}</mat-option>
+          }
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="campos">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>Obligatorio (máximo 30)</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" />
+        <mat-error>Obligatorio (máximo 30)</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="campos">
+      <mat-form-field appearance="outline">
+        <mat-label>DNI</mat-label>
+        <input matInput formControlName="dni" />
+        <mat-error>7 u 8 números</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput type="date" formControlName="fecha_nacimiento" />
+        <mat-error>Obligatoria</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="campos">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error>Email válido, máximo 30 caracteres</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" />
+        <mat-error>Solo números, hasta 10</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ usuario ? 'Nueva contraseña (opcional)' : 'Contraseña' }}</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error>Al menos 6 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Campos que dependen del tipo de usuario -->
+    @if (llevaSede()) {
+      <mat-form-field appearance="outline">
+        <mat-label>Sede</mat-label>
+        <mat-select formControlName="id_sede">
+          @for (sede of sedes(); track sede.id) {
+            <mat-option [value]="sede.id">{{ sede.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+
+    @if (esMedico()) {
+      <mat-form-field appearance="outline">
+        <mat-label>Especialidades</mat-label>
+        <!-- multiple: se pueden elegir varias; el valor es un array de ids -->
+        <mat-select formControlName="especialidades" multiple>
+          @for (especialidad of especialidades(); track especialidad.id) {
+            <mat-option [value]="especialidad.id">{{ especialidad.descripcion }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+
+    @if (esPaciente()) {
+      <mat-form-field appearance="outline">
+        <mat-label>Cobertura</mat-label>
+        <mat-select formControlName="id_cobertura">
+          @for (cobertura of coberturas(); track cobertura.id) {
+            <mat-option [value]="cobertura.id">{{ cobertura.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>Cancelar</button>
+    <button mat-flat-button type="submit" [disabled]="guardando()">Guardar</button>
+  </mat-dialog-actions>
+</form>

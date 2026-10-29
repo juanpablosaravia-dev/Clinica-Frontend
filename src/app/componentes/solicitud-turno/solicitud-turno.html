@@ -1,0 +1,151 @@
+<form [formGroup]="formulario">
+  <!-- [linear]="true": no se puede avanzar a un paso sin completar el anterior.
+       [stepControl] indica qué campo tiene que ser válido para pasar al siguiente. -->
+  <mat-stepper [linear]="true" orientation="vertical">
+    <mat-step [stepControl]="formulario.controls.id_especialidad" label="Especialidad">
+      <mat-form-field appearance="outline">
+        <mat-label>Especialidad</mat-label>
+        <!-- (selectionChange) es el evento que emite mat-select cuando se elige una opción -->
+        <mat-select formControlName="id_especialidad" (selectionChange)="alCambiarEspecialidad()">
+          @for (especialidad of especialidades(); track especialidad.id) {
+            <mat-option [value]="especialidad.id">{{ especialidad.descripcion }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <div class="botones-paso">
+        <button mat-flat-button matStepperNext type="button">Siguiente</button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="formulario.controls.id_sede" label="Sede">
+      @if (sedeFija()) {
+        <!-- Para el operador la sede es siempre la suya: no se puede cambiar -->
+        <p>Sede: <strong>{{ nombreSede() }}</strong></p>
+      } @else {
+        <mat-form-field appearance="outline">
+          <mat-label>Sede</mat-label>
+          <mat-select formControlName="id_sede" (selectionChange)="alCambiarSede()">
+            @for (sede of sedes(); track sede.id) {
+              <mat-option [value]="sede.id">{{ sede.nombre }} ({{ sede.direccion }})</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+      <div class="botones-paso">
+        <button mat-button matStepperPrevious type="button">Anterior</button>
+        <button mat-flat-button matStepperNext type="button">Siguiente</button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="formulario.controls.id_medico" label="Médico">
+      @if (cargando()) {
+        <mat-progress-bar mode="indeterminate" />
+      } @else if (medicos().length === 0) {
+        <p class="vacio">No hay médicos de esa especialidad en esa sede.</p>
+      } @else {
+        <mat-form-field appearance="outline">
+          <mat-label>Médico</mat-label>
+          <mat-select formControlName="id_medico" (selectionChange)="alCambiarMedico()">
+            @for (medico of medicos(); track medico.id) {
+              <mat-option [value]="medico.id">{{ medico.apellido }}, {{ medico.nombre }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+      <div class="botones-paso">
+        <button mat-button matStepperPrevious type="button">Anterior</button>
+        <button mat-flat-button matStepperNext type="button">Siguiente</button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="formulario.controls.fecha" label="Fecha">
+      @if (cargando()) {
+        <mat-progress-bar mode="indeterminate" />
+      } @else if (fechas().length === 0) {
+        <p class="vacio">El médico no tiene agenda disponible próximamente.</p>
+      } @else {
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha</mat-label>
+          <mat-select formControlName="fecha" (selectionChange)="alCambiarFecha()">
+            @for (fecha of fechas(); track fecha) {
+              <!-- El pipe "date" convierte 2026-10-28 en "miércoles, 28/10/2026" -->
+              <mat-option [value]="fecha">{{ fecha | date: 'EEEE dd/MM/yyyy' }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+      <div class="botones-paso">
+        <button mat-button matStepperPrevious type="button">Anterior</button>
+        <button mat-flat-button matStepperNext type="button">Siguiente</button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="formulario.controls.hora" label="Horario">
+      @if (cargando()) {
+        <mat-progress-bar mode="indeterminate" />
+      } @else if (horarios().length === 0) {
+        <p class="vacio">No quedan horarios libres ese día. Elegí otra fecha.</p>
+      } @else {
+        <mat-form-field appearance="outline">
+          <mat-label>Horario</mat-label>
+          <mat-select formControlName="hora">
+            @for (hora of horarios(); track hora) {
+              <mat-option [value]="hora">{{ hora }} hs</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+      <div class="botones-paso">
+        <button mat-button matStepperPrevious type="button">Anterior</button>
+        <button mat-flat-button matStepperNext type="button">Siguiente</button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="formulario.controls.nota" label="Nota y confirmación">
+      <mat-form-field appearance="outline" class="campo-ancho">
+        <mat-label>Nota (motivo de la consulta)</mat-label>
+        <input matInput formControlName="nota" />
+        @if (formulario.controls.nota.hasError('required')) {
+          <mat-error>La nota es obligatoria</mat-error>
+        }
+        @if (formulario.controls.nota.hasError('maxlength')) {
+          <mat-error>Máximo 40 caracteres</mat-error>
+        }
+      </mat-form-field>
+
+      <h3>Resumen del turno</h3>
+      <mat-list class="resumen">
+        <mat-list-item>
+          <span matListItemTitle>{{ nombreEspecialidad() }}</span>
+          <span matListItemLine>Especialidad</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>{{ nombreMedico() }}</span>
+          <span matListItemLine>Médico</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>{{ nombreSede() }}</span>
+          <span matListItemLine>Sede</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>
+            {{ formulario.controls.fecha.value | date: 'fullDate' }} a las
+            {{ formulario.controls.hora.value }} hs
+          </span>
+          <span matListItemLine>Fecha y hora</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>{{ cobertura() ?? 'Sin cobertura' }}</span>
+          <span matListItemLine>Cobertura</span>
+        </mat-list-item>
+      </mat-list>
+
+      <div class="botones-paso">
+        <button mat-button matStepperPrevious type="button">Anterior</button>
+        <button mat-flat-button type="button" [disabled]="guardando()" (click)="confirmar()">
+          Confirmar turno
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</form>

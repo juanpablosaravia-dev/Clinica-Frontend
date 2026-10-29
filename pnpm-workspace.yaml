@@ -1,0 +1,7 @@
+# Dependencias a las que pnpm les permite correr su script de instalación.
+# Sin esto, "pnpm start" y "pnpm build" se frenan con ERR_PNPM_IGNORED_BUILDS.
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true

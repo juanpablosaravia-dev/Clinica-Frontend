@@ -1,0 +1,75 @@
+<mat-card class="pagina">
+  <mat-card-header>
+    <mat-card-title>Mis turnos</mat-card-title>
+    <mat-card-subtitle>Hacé click en un turno para ver el detalle</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (cargando()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <mat-accordion>
+      @for (turno of turnos(); track turno.id) {
+        <mat-expansion-panel>
+          <!-- Lo que se ve con el panel cerrado -->
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ turno.fecha | date: 'dd/MM/yyyy' }} · {{ turno.hora }} hs
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ turno.especialidad }}
+              <!-- [class] arma el nombre de la clase CSS según el estado (estado-confirmado, etc.) -->
+              <mat-chip [class]="'estado estado-' + turno.estado">
+                {{ turno.estado | titlecase }}
+              </mat-chip>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <!-- Detalle desplegable -->
+          <dl class="detalle">
+            <dt>Fecha</dt>
+            <!-- 'fullDate' con el idioma es-AR: "miércoles, 28 de octubre de 2026" -->
+            <dd>{{ turno.fecha | date: 'fullDate' }} a las {{ turno.hora }} hs</dd>
+            <dt>Especialista</dt>
+            <dd>{{ turno.nombre_medico }} {{ turno.apellido_medico }}</dd>
+            <dt>Especialidad</dt>
+            <dd>{{ turno.especialidad }}</dd>
+            <dt>Sede</dt>
+            <dd>{{ turno.sede }}</dd>
+            <dt>Nota</dt>
+            <dd>{{ turno.nota }}</dd>
+          </dl>
+
+          <!-- Si ya fue atendido, se muestra el historial clínico que cargó el médico -->
+          @if (turno.estado === 'atendido' && turno.diagnostico) {
+            <div class="historial">
+              <h4><mat-icon>medical_information</mat-icon> Historial clínico</h4>
+              <dl class="detalle">
+                <dt>Diagnóstico</dt>
+                <dd>{{ turno.diagnostico }}</dd>
+                <dt>Tratamiento</dt>
+                <dd>{{ turno.tratamiento || '-' }}</dd>
+                <dt>Observaciones</dt>
+                <dd>{{ turno.observaciones || '-' }}</dd>
+              </dl>
+            </div>
+          }
+
+          @if (turno.estado === 'confirmado') {
+            <mat-action-row>
+              <button mat-button (click)="cancelar(turno)">
+                <mat-icon>event_busy</mat-icon>
+                Cancelar turno
+              </button>
+            </mat-action-row>
+          }
+        </mat-expansion-panel>
+      } @empty {
+        @if (!cargando()) {
+          <p class="vacio">Todavía no tenés turnos.</p>
+        }
+      }
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

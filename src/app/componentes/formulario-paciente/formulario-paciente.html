@@ -1,7 +1,10 @@
 <mat-card class="tarjeta formulario">
   <mat-card-header>
-    <mat-card-title>Crear cuenta de paciente</mat-card-title>
-    <mat-card-subtitle>Con tu cuenta vas a poder sacar turnos y ver tu historial</mat-card-subtitle>
+    <!-- titulo() y subtitulo() son los input() que manda el padre -->
+    <mat-card-title>{{ titulo() }}</mat-card-title>
+    @if (subtitulo()) {
+      <mat-card-subtitle>{{ subtitulo() }}</mat-card-subtitle>
+    }
   </mat-card-header>
 
   <form [formGroup]="formulario" (ngSubmit)="registrar()">
@@ -9,13 +12,13 @@
       <mat-form-field appearance="outline">
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="nombre" />
-        <mat-error>El nombre es obligatorio</mat-error>
+        <mat-error>El nombre es obligatorio (máximo 30 letras)</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Apellido</mat-label>
         <input matInput formControlName="apellido" />
-        <mat-error>El apellido es obligatorio</mat-error>
+        <mat-error>El apellido es obligatorio (máximo 30 letras)</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -37,6 +40,9 @@
         }
         @if (formulario.controls.email.hasError('email')) {
           <mat-error>El email no tiene un formato válido</mat-error>
+        }
+        @if (formulario.controls.email.hasError('maxlength')) {
+          <mat-error>Máximo 30 caracteres</mat-error>
         }
       </mat-form-field>
 
@@ -62,6 +68,7 @@
         <mat-label>Cobertura</mat-label>
         <mat-select formControlName="id_cobertura">
           @for (cobertura of coberturas(); track cobertura.id) {
+            <!-- [value] es un property binding: el valor que se guarda al elegir esta opción -->
             <mat-option [value]="cobertura.id">{{ cobertura.nombre }}</mat-option>
           }
         </mat-select>
@@ -70,8 +77,10 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-flat-button type="submit">Crear cuenta</button>
-      <a mat-button routerLink="/login">Ya tengo cuenta, ingresar</a>
+      <button mat-flat-button type="submit" [disabled]="guardando()">Registrar</button>
+      <!-- Content projection: acá aparece lo que el padre escriba ENTRE las etiquetas
+           <app-formulario-paciente> ... </app-formulario-paciente> (por ejemplo, un link al login). -->
+      <ng-content />
     </mat-card-actions>
   </form>
 </mat-card>
