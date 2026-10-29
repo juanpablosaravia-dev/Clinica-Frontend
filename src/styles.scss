@@ -6,8 +6,13 @@
   --verde-quirofano: #0e4f4a;
   --tinta: #15302c;
   --amarillo-senal: #f2c230;
-  --fondo: #eef3f1;
+  --fondo: #e8f0ed;
   --blanco: #ffffff;
+  // Tonos claros de la misma familia verde, para tablas, bordes y selecciones
+  --verde-suave: #dcebe6;
+  --verde-hover: #f1f7f5;
+  --borde: #cfdcd8;
+  --texto-secundario: #52675f;
 
   // Colores de cada sector (rol)
   --sector-paciente: #1f7a70;
@@ -29,19 +34,36 @@ html {
     )
   );
 
-  // Pisamos algunos colores del tema de Material con los nuestros
+  // Pisamos algunos colores del tema de Material con los nuestros.
+  // Las variables --mat-sys-* son las que usan TODOS los componentes de Material,
+  // así que cambiándolas acá se actualizan botones, tablas, menús, stepper, etc.
   --mat-sys-primary: var(--verde-quirofano);
   --mat-sys-on-primary: var(--blanco);
-  --mat-sys-surface: var(--fondo);
-  --mat-sys-on-surface: var(--tinta);
-  --mat-sys-surface-container-low: var(--blanco);
   --mat-sys-primary-container: #cfe5e0;
   --mat-sys-on-primary-container: var(--tinta);
+
+  // "Superficie" = el fondo de tablas, paneles, stepper, menús y diálogos: blanco,
+  // para que se vean limpios dentro de las tarjetas. El fondo de la página es --fondo.
+  --mat-sys-surface: var(--blanco);
+  --mat-sys-on-surface: var(--tinta);
+  --mat-sys-on-surface-variant: var(--texto-secundario);
+  --mat-sys-surface-container-lowest: var(--blanco);
+  --mat-sys-surface-container-low: var(--blanco);
+  --mat-sys-surface-container: var(--blanco);
+  --mat-sys-surface-container-high: var(--blanco);
+  --mat-sys-surface-container-highest: var(--verde-suave);
+
+  // Opción elegida en listas y selects, y bordes/divisores: misma familia verde
+  // (sin esto Material usa los tonos cian del tema base).
+  --mat-sys-secondary-container: var(--verde-suave);
+  --mat-sys-on-secondary-container: var(--tinta);
+  --mat-sys-outline: #7d918b;
+  --mat-sys-outline-variant: var(--borde);
 }
 
 body {
   color-scheme: light;
-  background-color: var(--mat-sys-surface);
+  background-color: var(--fondo);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-large);
   margin: 0;
@@ -136,6 +158,18 @@ h2 {
     width: 100%;
   }
 
+  // Encabezado de las tablas con un tinte verde, para separarlo de los datos
+  .tabla .mat-mdc-header-row {
+    background-color: var(--verde-suave);
+  }
+  .tabla .mat-mdc-header-cell {
+    font-weight: 700;
+    color: var(--tinta);
+  }
+  .tabla .mat-mdc-row:hover {
+    background-color: var(--verde-hover);
+  }
+
   // Columna de botones (editar / eliminar) pegada a la derecha
   .acciones {
     text-align: right;
@@ -155,7 +189,7 @@ h2 {
 // Mensaje cuando un listado no tiene resultados (en lugar de una tabla vacía)
 .vacio {
   padding: 16px 0;
-  color: #5a6e6a;
+  color: var(--texto-secundario);
 }
 
 // Fila de filtros arriba de las tablas (fecha, sede, buscadores...)
@@ -181,7 +215,7 @@ h2 {
   cursor: pointer;
 
   &:hover {
-    background-color: #f2f7f5;
+    background-color: var(--verde-hover);
   }
 
   &.seleccionada {
@@ -241,7 +275,7 @@ h2 {
   margin-top: 12px;
   padding: 12px 16px;
   border-left: 4px solid var(--verde-quirofano);
-  background-color: #f2f7f5;
+  background-color: var(--verde-hover);
 
   h4 {
     display: flex;
@@ -327,10 +361,10 @@ h2 {
   align-items: center;
   gap: 12px;
   padding: 8px 0;
-  border-bottom: 1px solid #dde6e3;
+  border-bottom: 1px solid var(--borde);
 
   .nota {
-    color: #5a6e6a;
+    color: var(--texto-secundario);
   }
 }
 
@@ -359,7 +393,7 @@ h2 {
     color: var(--verde-quirofano);
   }
   .etiqueta {
-    color: #5a6e6a;
+    color: var(--texto-secundario);
   }
 }
 
@@ -389,7 +423,7 @@ h2 {
     align-items: center;
     gap: 8px;
     padding: 10px 16px;
-    border-bottom: 1px solid #dde6e3;
+    border-bottom: 1px solid var(--borde);
 
     .texto {
       display: flex;
@@ -399,7 +433,7 @@ h2 {
     }
 
     small {
-      color: #5a6e6a;
+      color: var(--texto-secundario);
     }
 
     // Las no leídas se distinguen con fondo y negrita

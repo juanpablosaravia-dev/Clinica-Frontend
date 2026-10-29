@@ -6,6 +6,8 @@
 
 .contenedor {
   flex: 1;
+  // Fondo de la zona central: verde muy claro, así las tarjetas blancas resaltan
+  --mat-sidenav-content-background-color: var(--fondo);
 }
 
 // El menú lateral va sobre fondo oscuro
