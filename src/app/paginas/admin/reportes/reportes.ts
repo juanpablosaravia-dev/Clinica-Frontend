@@ -17,8 +17,10 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 // Chart.js necesita registrar los tipos de gráfico que se van a usar (barras, torta, etc.).
 Chart.register(...registerables);
 
-// Colores de los gráficos (los mismos de la identidad visual de la app).
-const COLORES = ['#0e4f4a', '#f2c230', '#2e5eaa', '#c77d12', '#6b3fa0', '#1f7a70'];
+// Colores de los gráficos: los mismos de la identidad visual de la app
+// (azul de la marca, amarillo de señalización y los colores de cada sector).
+// Chart.js los usa en orden: una barra o una porción de torta por color.
+const COLORES = ['#1f7a70', '#f2c230', '#2e5eaa', '#c77d12', '#6b3fa0', '#14284b'];
 
 // Dashboard de reportes (admin). Un filtro de fechas actualiza los cuatro indicadores a la vez.
 // Gráficos con la librería Chart.js: turnos por especialidad (barras) y por sede (torta).
@@ -118,7 +120,11 @@ export class Reportes implements OnInit {
           {
             label: 'Turnos',
             data: reportes.porEspecialidad.map((fila) => fila.cantidad),
-            backgroundColor: COLORES[0],
+            // Con un array, cada barra (especialidad) toma un color distinto.
+            backgroundColor: COLORES,
+            borderRadius: 6,
+            // Barras más angostas: con pocas especialidades no ocupan todo el ancho.
+            maxBarThickness: 72,
           },
         ],
       },
@@ -138,6 +144,9 @@ export class Reportes implements OnInit {
           {
             data: reportes.porSede.map((fila) => fila.cantidad),
             backgroundColor: COLORES,
+            // Línea blanca entre porciones, para distinguirlas mejor.
+            borderColor: '#ffffff',
+            borderWidth: 2,
           },
         ],
       },

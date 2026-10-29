@@ -3,11 +3,16 @@
 // Identidad visual: señalética de hospital.
 // Cada rol es un "sector" con su propio color, como los carteles de pasillo.
 :root {
-  --verde-quirofano: #0e4f4a;
-  --tinta: #15302c;
+  --azul-marino: #14284b;
+  --tinta: #0f1a30;
   --amarillo-senal: #f2c230;
-  --fondo: #eef3f1;
+  --fondo: #e8edf5;
   --blanco: #ffffff;
+  // Tonos claros de la misma familia azul, para tablas, bordes y selecciones
+  --azul-suave: #dce4f0;
+  --azul-hover: #f2f5fa;
+  --borde: #cdd5e2;
+  --texto-secundario: #525f78;
 
   // Colores de cada sector (rol)
   --sector-paciente: #1f7a70;
@@ -21,7 +26,7 @@ html {
   @include mat.theme(
     (
       color: (
-        primary: mat.$cyan-palette,
+        primary: mat.$blue-palette,
         tertiary: mat.$yellow-palette,
       ),
       typography: 'Atkinson Hyperlegible Next',
@@ -29,19 +34,36 @@ html {
     )
   );
 
-  // Pisamos algunos colores del tema de Material con los nuestros
-  --mat-sys-primary: var(--verde-quirofano);
+  // Pisamos algunos colores del tema de Material con los nuestros.
+  // Las variables --mat-sys-* son las que usan TODOS los componentes de Material,
+  // así que cambiándolas acá se actualizan botones, tablas, menús, stepper, etc.
+  --mat-sys-primary: var(--azul-marino);
   --mat-sys-on-primary: var(--blanco);
-  --mat-sys-surface: var(--fondo);
-  --mat-sys-on-surface: var(--tinta);
-  --mat-sys-surface-container-low: var(--blanco);
-  --mat-sys-primary-container: #cfe5e0;
+  --mat-sys-primary-container: #d3dcee;
   --mat-sys-on-primary-container: var(--tinta);
+
+  // "Superficie" = el fondo de tablas, paneles, stepper, menús y diálogos: blanco,
+  // para que se vean limpios dentro de las tarjetas. El fondo de la página es --fondo.
+  --mat-sys-surface: var(--blanco);
+  --mat-sys-on-surface: var(--tinta);
+  --mat-sys-on-surface-variant: var(--texto-secundario);
+  --mat-sys-surface-container-lowest: var(--blanco);
+  --mat-sys-surface-container-low: var(--blanco);
+  --mat-sys-surface-container: var(--blanco);
+  --mat-sys-surface-container-high: var(--blanco);
+  --mat-sys-surface-container-highest: var(--azul-suave);
+
+  // Opción elegida en listas y selects, y bordes/divisores: misma familia azul
+  // (sin esto Material usa los tonos del tema base).
+  --mat-sys-secondary-container: var(--azul-suave);
+  --mat-sys-on-secondary-container: var(--tinta);
+  --mat-sys-outline: #7c879c;
+  --mat-sys-outline-variant: var(--borde);
 }
 
 body {
   color-scheme: light;
-  background-color: var(--mat-sys-surface);
+  background-color: var(--fondo);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-large);
   margin: 0;
@@ -76,12 +98,12 @@ h2 {
   margin: 0 auto;
 }
 
-// Formularios (login y registro): ficha con una banda verde arriba
+// Formularios (login y registro): ficha con una banda azul arriba
 .formulario {
   overflow: hidden;
 
   mat-card-header {
-    background-color: var(--verde-quirofano);
+    background-color: var(--azul-marino);
     color: var(--blanco);
     padding: 20px 24px;
   }
@@ -92,7 +114,7 @@ h2 {
   }
 
   mat-card-subtitle {
-    color: #cfe5e0;
+    color: #d3dcee;
   }
 
   mat-card-content {
@@ -136,6 +158,18 @@ h2 {
     width: 100%;
   }
 
+  // Encabezado de las tablas con un tinte azul, para separarlo de los datos
+  .tabla .mat-mdc-header-row {
+    background-color: var(--azul-suave);
+  }
+  .tabla .mat-mdc-header-cell {
+    font-weight: 700;
+    color: var(--tinta);
+  }
+  .tabla .mat-mdc-row:hover {
+    background-color: var(--azul-hover);
+  }
+
   // Columna de botones (editar / eliminar) pegada a la derecha
   .acciones {
     text-align: right;
@@ -155,7 +189,7 @@ h2 {
 // Mensaje cuando un listado no tiene resultados (en lugar de una tabla vacía)
 .vacio {
   padding: 16px 0;
-  color: #5a6e6a;
+  color: var(--texto-secundario);
 }
 
 // Fila de filtros arriba de las tablas (fecha, sede, buscadores...)
@@ -181,7 +215,7 @@ h2 {
   cursor: pointer;
 
   &:hover {
-    background-color: #f2f7f5;
+    background-color: var(--azul-hover);
   }
 
   &.seleccionada {
@@ -240,8 +274,8 @@ h2 {
 .historial {
   margin-top: 12px;
   padding: 12px 16px;
-  border-left: 4px solid var(--verde-quirofano);
-  background-color: #f2f7f5;
+  border-left: 4px solid var(--azul-marino);
+  background-color: var(--azul-hover);
 
   h4 {
     display: flex;
@@ -327,10 +361,10 @@ h2 {
   align-items: center;
   gap: 12px;
   padding: 8px 0;
-  border-bottom: 1px solid #dde6e3;
+  border-bottom: 1px solid var(--borde);
 
   .nota {
-    color: #5a6e6a;
+    color: var(--texto-secundario);
   }
 }
 
@@ -356,10 +390,10 @@ h2 {
     display: block;
     font-size: 40px;
     font-weight: 800;
-    color: var(--verde-quirofano);
+    color: var(--azul-marino);
   }
   .etiqueta {
-    color: #5a6e6a;
+    color: var(--texto-secundario);
   }
 }
 
@@ -389,7 +423,7 @@ h2 {
     align-items: center;
     gap: 8px;
     padding: 10px 16px;
-    border-bottom: 1px solid #dde6e3;
+    border-bottom: 1px solid var(--borde);
 
     .texto {
       display: flex;
@@ -399,7 +433,7 @@ h2 {
     }
 
     small {
-      color: #5a6e6a;
+      color: var(--texto-secundario);
     }
 
     // Las no leídas se distinguen con fondo y negrita

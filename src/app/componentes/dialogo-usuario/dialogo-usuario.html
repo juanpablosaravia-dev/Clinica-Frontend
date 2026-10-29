@@ -98,6 +98,7 @@
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
+    <!-- mat-dialog-close cierra el diálogo sin devolver nada: la pantalla de Usuarios no recarga -->
     <button mat-button type="button" mat-dialog-close>Cancelar</button>
     <button mat-flat-button type="submit" [disabled]="guardando()">Guardar</button>
   </mat-dialog-actions>

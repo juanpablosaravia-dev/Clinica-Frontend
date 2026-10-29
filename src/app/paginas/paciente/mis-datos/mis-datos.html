@@ -29,7 +29,7 @@
           </mat-form-field>
         </div>
 
-        <!-- Datos editables -->
+        <!-- Datos editables: son los únicos que están en el formulario reactivo (y los únicos que se envían) -->
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput type="email" formControlName="email" />
@@ -64,6 +64,8 @@
             <input matInput type="password" formControlName="repetirPassword" />
           </mat-form-field>
         </div>
+        <!-- "passwordsDistintas" lo devuelve el validador propio validarPasswords (mis-datos.ts).
+             Es un error de TODO el formulario (no de un campo), por eso se pregunta a "formulario". -->
         @if (formulario.hasError('passwordsDistintas') && formulario.controls.repetirPassword.touched) {
           <p class="error-formulario">Las contraseñas no coinciden.</p>
         }

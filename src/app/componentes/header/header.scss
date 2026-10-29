@@ -1,6 +1,6 @@
 // Colores de la barra (Material los aplica también a los botones que tiene adentro)
 mat-toolbar {
-  --mat-toolbar-container-background-color: var(--verde-quirofano);
+  --mat-toolbar-container-background-color: var(--azul-marino);
   --mat-toolbar-container-text-color: var(--blanco);
   --mat-icon-button-icon-color: var(--blanco);
   gap: 8px;
@@ -14,7 +14,7 @@ mat-toolbar {
   font-size: 22px;
 }
 
-// Cruz sanitaria dibujada con CSS: un cuadrado blanco con dos barras verdes
+// Cruz sanitaria dibujada con CSS: un cuadrado blanco con dos barras azules
 .cruz {
   position: relative;
   width: 26px;
@@ -26,7 +26,7 @@ mat-toolbar {
   &::after {
     content: '';
     position: absolute;
-    background-color: var(--verde-quirofano);
+    background-color: var(--azul-marino);
   }
   &::before {
     left: 10px;

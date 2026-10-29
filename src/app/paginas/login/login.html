@@ -4,11 +4,15 @@
     <mat-card-subtitle>Ingresá con tu DNI y tu contraseña</mat-card-subtitle>
   </mat-card-header>
 
+  <!-- [formGroup] conecta el <form> con "formulario" de login.ts.
+       (ngSubmit) llama a ingresar() al apretar el botón o Enter. -->
   <form [formGroup]="formulario" (ngSubmit)="ingresar()">
     <mat-card-content>
       <mat-form-field appearance="outline">
         <mat-label>DNI</mat-label>
+        <!-- formControlName une el input con el campo "dni" del formulario -->
         <input matInput formControlName="dni" />
+        <!-- Cada mensaje aparece solo si el campo tiene ese error (y ya fue tocado) -->
         @if (formulario.controls.dni.hasError('required')) {
           <mat-error>El DNI es obligatorio</mat-error>
         }
@@ -19,6 +23,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
+        <!-- type="password" oculta lo que se escribe -->
         <input matInput type="password" formControlName="password" />
         @if (formulario.controls.password.hasError('required')) {
           <mat-error>La contraseña es obligatoria</mat-error>
@@ -27,6 +32,7 @@
     </mat-card-content>
 
     <mat-card-actions>
+      <!-- type="submit" dispara el (ngSubmit) del form -->
       <button mat-flat-button type="submit">Ingresar</button>
       <a mat-button routerLink="/registro">Crear cuenta</a>
     </mat-card-actions>

@@ -11,6 +11,7 @@ import {
 } from '../modelos/reporte';
 import { RespuestaApi } from '../modelos/respuesta-api';
 
+// Reportes y estadísticas (solo admin): los cuatro indicadores del dashboard.
 @Injectable({ providedIn: 'root' })
 export class ReporteService {
   private http = inject(HttpClient);

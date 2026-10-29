@@ -1,13 +1,20 @@
+<!-- Layout general de la aplicación: header arriba, menú lateral a la izquierda,
+     la pantalla actual en el centro y el footer abajo. Se arma una sola vez:
+     al navegar solo cambia lo que está dentro de <router-outlet>. -->
 <div class="layout">
+  <!-- El header avisa con su output() "alternarMenu" y acá abrimos o cerramos el menú.
+       "menuLateral" es la variable de template (#menuLateral) del mat-sidenav de abajo. -->
   <app-header (alternarMenu)="menuLateral.toggle()" />
 
   <mat-sidenav-container class="contenedor">
+    <!-- En PC el menú queda fijo al costado ('side'); en pantallas chicas se abre por encima ('over'). -->
     <mat-sidenav #menuLateral [mode]="esCelular ? 'over' : 'side'" [opened]="!esCelular">
       <app-menu />
     </mat-sidenav>
 
     <mat-sidenav-content>
       <main>
+        <!-- Acá el router dibuja el componente de la ruta actual (definida en app.routes.ts) -->
         <router-outlet />
       </main>
     </mat-sidenav-content>

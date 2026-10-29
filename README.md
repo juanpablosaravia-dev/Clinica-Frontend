@@ -52,6 +52,12 @@ Variables de entorno del backend (`.env`):
 `pnpm seed:demo` calcula las fechas a partir del día en que se corre (ayer, hoy y los próximos
 días), así siempre hay agenda y turnos para probar.
 
+> **⚠️ Antes de la defensa, recrear la base el mismo día.** La agenda del seed solo cubre de ayer a
+> pasado mañana contando desde el día en que se corrió, y `pnpm seed:demo` no se vuelve a ejecutar
+> si ya encuentra sus datos. Si se cargó días antes, no va a haber agenda ni turnos de hoy y el
+> paciente no va a ver fechas en "Nuevo turno". Hay que borrar la base `clinica`, crearla de nuevo
+> y repetir los pasos 1 y 2: importar el script, `pnpm seed:usuarios` y `pnpm seed:demo`.
+
 ### 3. Frontend (`Clinica-Frontend`)
 
 ```bash

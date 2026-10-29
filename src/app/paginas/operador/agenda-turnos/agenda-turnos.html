@@ -9,6 +9,7 @@
       <div class="fila-filtros">
         <mat-form-field appearance="outline">
           <mat-label>Fecha</mat-label>
+          <!-- [value] muestra la fecha del signal; (change) la actualiza y el effect() recarga la tabla -->
           <input matInput type="date" #campoFecha [value]="fecha()" (change)="cambiarFecha(campoFecha.value)" />
         </mat-form-field>
 
@@ -72,6 +73,8 @@
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let fila" class="acciones">
+              <!-- Si está mirando otra sede, los botones directamente no se dibujan:
+                   la interfaz no le permite modificar agenda ni turnos ajenos. -->
               @if (esMiSede()) {
                 <button mat-icon-button matTooltip="Editar agenda" (click)="editarAgenda(fila)">
                   <mat-icon>edit</mat-icon>
@@ -102,6 +105,8 @@
         </button>
       </mat-card-header>
       <mat-card-content>
+        <!-- Mismo componente que usa el médico en "Mi agenda", pero con [sedeFija]:
+             el operador solo carga rangos en su sede. (cambio) avisa para refrescar la tabla de arriba. -->
         <app-gestor-agenda
           [idMedico]="medico.id"
           [fecha]="fecha()"

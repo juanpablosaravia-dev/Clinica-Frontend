@@ -5,6 +5,8 @@ import { environment } from '../../environments/environment';
 import { RespuestaApi } from '../modelos/respuesta-api';
 import { PacienteEncontrado } from '../modelos/usuario';
 
+// Búsqueda de pacientes: GET /pacientes?busqueda=...
+// La usa el componente BuscadorPaciente (historial del médico y asignar turno del operador).
 @Injectable({ providedIn: 'root' })
 export class PacienteService {
   private http = inject(HttpClient);

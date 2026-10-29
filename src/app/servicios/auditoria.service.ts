@@ -5,12 +5,15 @@ import { environment } from '../../environments/environment';
 import { FiltrosAuditoria, RegistroAuditoria } from '../modelos/auditoria';
 import { RespuestaApi } from '../modelos/respuesta-api';
 
+// Registro de auditoría (solo admin): GET /auditoria.
+// El backend ya lo devuelve ordenado del más reciente al más antiguo.
 @Injectable({ providedIn: 'root' })
 export class AuditoriaService {
   private http = inject(HttpClient);
   private url = `${environment.apiUrl}/auditoria`;
 
   // Solo se agregan a la URL los filtros que tienen valor.
+  // HttpParams es "inmutable": set() no lo modifica, devuelve uno nuevo. Por eso se reasigna.
   listar(filtros: FiltrosAuditoria): Observable<RegistroAuditoria[]> {
     let params = new HttpParams();
     if (filtros.id_usuario) {
