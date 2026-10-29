@@ -1,8 +1,39 @@
 @if (auth.usuario(); as usuario) {
-  <!-- Con sesión: saludo con el color del sector del usuario -->
+  <!-- Con sesión: banner de bienvenida. La clase rol-... trae el color del sector del usuario -->
   <section [class]="'saludo rol-' + usuario.rol">
-    <h1>Hola, {{ usuario.nombre }}</h1>
-    <p>Elegí una función del menú de la izquierda para comenzar.</p>
+    <div class="texto-saludo">
+      <span class="sector">{{ nombreSector[usuario.rol] }}</span>
+      <h1>Hola, {{ usuario.nombre }}</h1>
+      <!-- 'fullDate' con el idioma es-AR: "jueves, 29 de octubre de 2026" -->
+      <p class="fecha">{{ hoy | date: 'fullDate' }}</p>
+      <p>Elegí una función del menú de la izquierda para comenzar.</p>
+    </div>
+
+    <!-- Ilustración de la clínica dibujada con SVG (no necesita archivos de imagen).
+         aria-hidden: es decorativa, los lectores de pantalla la ignoran. -->
+    <svg class="ilustracion" viewBox="0 0 240 180" aria-hidden="true">
+      <!-- Piso -->
+      <rect x="10" y="160" width="220" height="6" rx="3" fill="#ffffff" opacity="0.25" />
+      <!-- Edificio -->
+      <rect x="50" y="50" width="140" height="110" rx="6" fill="#ffffff" />
+      <rect x="95" y="20" width="50" height="40" rx="6" fill="#ffffff" />
+      <!-- Cruz sanitaria en la placa amarilla -->
+      <rect x="104" y="26" width="32" height="28" rx="4" fill="#f2c230" />
+      <rect x="117" y="30" width="6" height="20" style="fill: var(--azul-marino)" />
+      <rect x="110" y="37" width="20" height="6" style="fill: var(--azul-marino)" />
+      <!-- Ventanas -->
+      <rect x="66" y="70" width="26" height="20" rx="3" style="fill: var(--color-sector)" opacity="0.8" />
+      <rect x="148" y="70" width="26" height="20" rx="3" style="fill: var(--color-sector)" opacity="0.8" />
+      <rect x="66" y="104" width="26" height="20" rx="3" style="fill: var(--color-sector)" opacity="0.8" />
+      <rect x="148" y="104" width="26" height="20" rx="3" style="fill: var(--color-sector)" opacity="0.8" />
+      <!-- Puerta -->
+      <rect x="104" y="112" width="32" height="48" rx="3" style="fill: var(--azul-marino)" />
+      <!-- Arbolitos -->
+      <circle cx="28" cy="138" r="16" fill="#f2c230" opacity="0.9" />
+      <rect x="26" y="146" width="4" height="14" fill="#ffffff" opacity="0.6" />
+      <circle cx="212" cy="138" r="16" fill="#f2c230" opacity="0.9" />
+      <rect x="210" y="146" width="4" height="14" fill="#ffffff" opacity="0.6" />
+    </svg>
   </section>
 } @else {
   <!-- Sin sesión: invitación a ingresar o registrarse -->

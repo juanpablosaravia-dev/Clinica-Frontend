@@ -1,25 +1,43 @@
+// Franja fina de una sola línea: marca a la izquierda, datos al centro y redes a la derecha
 footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  padding: 20px 24px;
+  gap: 8px 24px;
+  padding: 6px 24px;
   background-color: var(--tinta);
   color: var(--blanco);
-  border-top: 4px solid var(--amarillo-senal);
+  border-top: 3px solid var(--amarillo-senal);
+  font-size: 14px;
+}
+
+.marca {
+  font-weight: 700;
+}
+
+.datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  opacity: 0.9;
 }
 
 .dato {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 
+  // Íconos chicos, en el amarillo de señalización
   mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
     color: var(--amarillo-senal);
   }
 }
 
-a {
-  --mat-button-text-label-text-color: var(--blanco);
+// Botones de ícono de las redes, en blanco
+.redes a {
+  --mat-icon-button-icon-color: var(--blanco);
 }
