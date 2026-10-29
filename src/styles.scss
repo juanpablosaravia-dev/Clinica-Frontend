@@ -108,6 +108,313 @@ h2 {
   }
 }
 
+// Pantallas de administración (sedes, especialidades, coberturas):
+// formulario arriba y listado abajo
+.pagina {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  // Campos del formulario uno al lado del otro
+  .campos {
+    display: flex;
+    gap: 12px;
+
+    mat-form-field {
+      flex: 1;
+    }
+  }
+
+  .filtro {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .tabla {
+    width: 100%;
+  }
+
+  // Columna de botones (editar / eliminar) pegada a la derecha
+  .acciones {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  // Botón a la derecha del título de una tarjeta (cerrar panel, "Nuevo usuario")
+  mat-card-header {
+    align-items: center;
+
+    .boton-cerrar {
+      margin-left: auto;
+    }
+  }
+}
+
+// Mensaje cuando un listado no tiene resultados (en lugar de una tabla vacía)
+.vacio {
+  padding: 16px 0;
+  color: #5a6e6a;
+}
+
+// Fila de filtros arriba de las tablas (fecha, sede, buscadores...)
+.fila-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+
+  mat-form-field {
+    min-width: 200px;
+  }
+
+  // Los botones quedan a la altura del input, no del texto de ayuda
+  button {
+    margin-bottom: 20px;
+  }
+}
+
+// Filas de tabla que se pueden clickear (turnos programados)
+.fila-clickeable {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f2f7f5;
+  }
+
+  &.seleccionada {
+    background-color: var(--mat-sys-primary-container);
+  }
+}
+
+// Chip con el estado del turno: cada estado con su color
+.estado {
+  margin-left: 12px;
+
+  &.estado-confirmado {
+    --mat-chip-elevated-container-color: #d7f0e4;
+    --mat-chip-label-text-color: #0b5d3b;
+  }
+  &.estado-cancelado {
+    --mat-chip-elevated-container-color: #fbdcdc;
+    --mat-chip-label-text-color: #8a1c1c;
+  }
+  &.estado-atendido {
+    --mat-chip-elevated-container-color: #dce6f7;
+    --mat-chip-label-text-color: #1f3f7a;
+  }
+}
+
+// Acción de un registro de auditoría
+.accion {
+  font-weight: 700;
+
+  &.accion-ALTA {
+    color: #0b5d3b;
+  }
+  &.accion-BAJA {
+    color: #8a1c1c;
+  }
+  &.accion-MODIFICACION {
+    color: #8a5a00;
+  }
+}
+
+// Detalle desplegable de un turno (Mis turnos): pares "etiqueta: valor"
+.detalle {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 6px 16px;
+  margin: 8px 0;
+
+  dt {
+    font-weight: 700;
+  }
+  dd {
+    margin: 0;
+  }
+}
+
+.historial {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-left: 4px solid var(--verde-quirofano);
+  background-color: #f2f7f5;
+
+  h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px;
+  }
+}
+
+// Formularios dentro de diálogos: un campo debajo del otro.
+// Se repite la clase de Material (.mat-mdc-dialog-content) para que esta regla
+// tenga más prioridad que el "display: block" que trae el diálogo.
+.mat-mdc-dialog-content.campos-dialogo {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+
+  .campos {
+    display: flex;
+    gap: 12px;
+
+    mat-form-field {
+      flex: 1;
+    }
+  }
+}
+
+// Campos lado a lado en formularios de tarjeta (Mis datos)
+.formulario .campos {
+  display: flex;
+  gap: 12px;
+
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+// Error de un validador de todo el formulario (por ejemplo, horario inválido)
+.error-formulario {
+  color: var(--mat-sys-error);
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+// Encabezado de una sección con un botón a la derecha (gestor de agenda)
+.encabezado-seccion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+// Stepper de "Nuevo turno"
+.botones-paso {
+  display: flex;
+  gap: 8px;
+}
+
+.campo-ancho {
+  width: 100%;
+}
+
+.resumen {
+  max-width: 480px;
+}
+
+// Paciente elegido en "Asignar turno"
+.paciente-elegido {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+// Turnos confirmados en el panel del operador
+.fila-turno {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #dde6e3;
+
+  .nota {
+    color: #5a6e6a;
+  }
+}
+
+.aviso-solo-lectura {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sector-operador);
+}
+
+// Reportes: tarjetas con números grandes y gráficos lado a lado
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.indicador {
+  padding: 20px;
+  text-align: center;
+
+  .valor {
+    display: block;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--verde-quirofano);
+  }
+  .etiqueta {
+    color: #5a6e6a;
+  }
+}
+
+.graficos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  // Sin min-width: 0 las tarjetas de la grilla crecen con el gráfico y se desbordan
+  mat-card {
+    min-width: 0;
+  }
+}
+
+// Chart.js toma el tamaño de este contenedor (por eso la altura fija)
+.contenedor-grafico {
+  position: relative;
+  height: 280px;
+}
+
+// Menú desplegable de notificaciones (se dibuja fuera del header, por eso va acá)
+.menu-notificaciones {
+  max-width: 380px !important;
+
+  .notificacion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #dde6e3;
+
+    .texto {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+    }
+
+    small {
+      color: #5a6e6a;
+    }
+
+    // Las no leídas se distinguen con fondo y negrita
+    &.no-leida {
+      background-color: #fff6d6;
+      font-weight: 700;
+    }
+  }
+
+  .sin-notificaciones {
+    padding: 12px 16px;
+    margin: 0;
+  }
+}
+
 // Páginas de aviso: en construcción, acceso denegado y no encontrada
 .aviso {
   align-items: flex-start;

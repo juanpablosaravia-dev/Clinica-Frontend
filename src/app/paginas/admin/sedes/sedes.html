@@ -1,0 +1,128 @@
+<div class="pagina">
+  <!-- Formulario de alta / modificación -->
+  <mat-card class="formulario">
+    <mat-card-header>
+      <!-- {{ }} muestra en pantalla el valor de una expresión de la clase -->
+      <mat-card-title>{{ sedeEnEdicion() ? 'Modificar sede' : 'Nueva sede' }}</mat-card-title>
+    </mat-card-header>
+
+    <!-- [formGroup] conecta el <form> con "formulario" de la clase.
+         (ngSubmit) llama a guardar() cuando se envía. -->
+    <form [formGroup]="formulario" (ngSubmit)="guardar()">
+      <mat-card-content>
+        <div class="campos">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <!-- formControlName une el input con el campo "nombre" del formulario -->
+            <input matInput formControlName="nombre" />
+            @if (formulario.controls.nombre.hasError('required')) {
+              <mat-error>El nombre es obligatorio</mat-error>
+            }
+            @if (formulario.controls.nombre.hasError('maxlength')) {
+              <mat-error>Máximo 50 caracteres</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion" />
+            @if (formulario.controls.direccion.hasError('required')) {
+              <mat-error>La dirección es obligatoria</mat-error>
+            }
+            @if (formulario.controls.direccion.hasError('maxlength')) {
+              <mat-error>Máximo 100 caracteres</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="telefono" />
+            @if (formulario.controls.telefono.hasError('required')) {
+              <mat-error>El teléfono es obligatorio</mat-error>
+            }
+            @if (formulario.controls.telefono.hasError('pattern')) {
+              <mat-error>Solo números, espacios y guiones</mat-error>
+            }
+            @if (formulario.controls.telefono.hasError('maxlength')) {
+              <mat-error>Máximo 15 caracteres</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <!-- [disabled] deshabilita el botón mientras se espera la respuesta del backend -->
+        <button mat-flat-button type="submit" [disabled]="guardando()">
+          {{ sedeEnEdicion() ? 'Guardar cambios' : 'Agregar sede' }}
+        </button>
+        @if (sedeEnEdicion()) {
+          <button mat-button type="button" (click)="cancelarEdicion()">Cancelar</button>
+        }
+      </mat-card-actions>
+    </form>
+  </mat-card>
+
+  <!-- Listado -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Sedes</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="filtro">
+        <mat-label>Buscar</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <!-- #campoFiltro es una referencia al input; en cada tecla guardamos su texto en el signal "filtro" -->
+        <input matInput #campoFiltro (input)="filtro.set(campoFiltro.value)" />
+      </mat-form-field>
+
+      <!-- Indicador de carga mientras se espera al backend -->
+      @if (cargando()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+
+      @if (sedesFiltradas().length > 0) {
+        <!-- Tabla de Angular Material: [dataSource] es el array a mostrar (ya filtrado) -->
+        <table mat-table [dataSource]="sedesFiltradas()" class="tabla">
+          <!-- Cada ng-container define una columna: su título (th) y qué mostrar en cada fila (td) -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let sede">{{ sede.nombre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="direccion">
+            <th mat-header-cell *matHeaderCellDef>Dirección</th>
+            <td mat-cell *matCellDef="let sede">{{ sede.direccion }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+            <td mat-cell *matCellDef="let sede">{{ sede.telefono }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let sede" class="acciones">
+              <!-- (click) llama a la función de la clase pasándole la sede de esa fila -->
+              <button mat-icon-button matTooltip="Modificar" (click)="editar(sede)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Eliminar" (click)="eliminar(sede)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Fila de títulos y filas de datos, usando el array "columnas" de la clase -->
+          <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+          <tr mat-row *matRowDef="let fila; columns: columnas"></tr>
+        </table>
+      } @else if (!cargando()) {
+        <!-- En lugar de una tabla vacía mostramos un mensaje -->
+        <p class="vacio">
+          {{ sedes().length === 0 ? 'No hay sedes cargadas.' : 'Ninguna sede coincide con la búsqueda.' }}
+        </p>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

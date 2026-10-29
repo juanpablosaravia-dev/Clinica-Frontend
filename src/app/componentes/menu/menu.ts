@@ -10,27 +10,28 @@ interface OpcionMenu {
   ruta: string;
 }
 
-// Opciones de cada rol. Las de semanas futuras llevan a "En construcción".
+// Opciones de cada rol. Cada ruta tiene su pantalla en app.routes.ts.
 const OPCIONES_POR_ROL: Record<string, OpcionMenu[]> = {
   paciente: [
-    { texto: 'Sacar turno', icono: 'event_available', ruta: '/paciente/sacar-turno' },
+    { texto: 'Nuevo turno', icono: 'event_available', ruta: '/paciente/nuevo-turno' },
     { texto: 'Mis turnos', icono: 'event_note', ruta: '/paciente/mis-turnos' },
-    { texto: 'Mi historial clínico', icono: 'history', ruta: '/paciente/historial' },
+    { texto: 'Mis datos personales', icono: 'badge', ruta: '/paciente/mis-datos' },
   ],
   medico: [
     { texto: 'Mi agenda', icono: 'calendar_month', ruta: '/medico/agenda' },
     { texto: 'Turnos programados', icono: 'event_note', ruta: '/medico/turnos' },
-    { texto: 'Historial de pacientes', icono: 'history', ruta: '/medico/historial' },
+    { texto: 'Historial clínico', icono: 'history', ruta: '/medico/historial' },
   ],
   operador: [
-    { texto: 'Agenda médica', icono: 'calendar_month', ruta: '/operador/agenda' },
-    { texto: 'Dar turno', icono: 'event_available', ruta: '/operador/dar-turno' },
-    { texto: 'Turnos de la sede', icono: 'event_note', ruta: '/operador/turnos' },
+    { texto: 'Agenda y turnos', icono: 'calendar_month', ruta: '/operador/agenda' },
+    { texto: 'Alta de paciente', icono: 'person_add', ruta: '/operador/alta-paciente' },
+    { texto: 'Asignar turno', icono: 'event_available', ruta: '/operador/asignar-turno' },
   ],
   admin: [
     { texto: 'Sedes', icono: 'apartment', ruta: '/admin/sedes' },
     { texto: 'Especialidades', icono: 'medical_services', ruta: '/admin/especialidades' },
     { texto: 'Coberturas', icono: 'health_and_safety', ruta: '/admin/coberturas' },
+    { texto: 'Usuarios', icono: 'group', ruta: '/admin/usuarios' },
     { texto: 'Auditoría', icono: 'fact_check', ruta: '/admin/auditoria' },
     { texto: 'Reportes', icono: 'bar_chart', ruta: '/admin/reportes' },
   ],

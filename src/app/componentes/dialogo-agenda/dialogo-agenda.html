@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>{{ datos.rango ? 'Modificar rango horario' : 'Nuevo rango horario' }}</h2>
+
+<form [formGroup]="formulario" (ngSubmit)="guardar()">
+  <mat-dialog-content class="campos-dialogo">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha</mat-label>
+      <input matInput type="date" formControlName="fecha" />
+      <mat-error>La fecha es obligatoria</mat-error>
+    </mat-form-field>
+
+    <div class="campos">
+      <mat-form-field appearance="outline">
+        <mat-label>Hora de entrada</mat-label>
+        <!-- type="time" entrega la hora como HH:MM -->
+        <input matInput type="time" formControlName="hora_entrada" />
+        <mat-error>Obligatoria</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Hora de salida</mat-label>
+        <input matInput type="time" formControlName="hora_salida" />
+        <mat-error>Obligatoria</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Error del validador propio: está en el formulario completo, no en un campo -->
+    @if (formulario.hasError('horarioInvalido')) {
+      <p class="error-formulario">La hora de salida debe ser posterior a la de entrada.</p>
+    }
+
+    <mat-form-field appearance="outline">
+      <mat-label>Especialidad</mat-label>
+      <mat-select formControlName="id_especialidad">
+        @for (especialidad of datos.especialidades; track especialidad.id) {
+          <mat-option [value]="especialidad.id">{{ especialidad.descripcion }}</mat-option>
+        }
+      </mat-select>
+      <mat-error>Elegí una especialidad</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Sede</mat-label>
+      <mat-select formControlName="id_sede">
+        @for (sede of datos.sedes; track sede.id) {
+          <!-- Si la sede es fija (operador), las demás opciones quedan deshabilitadas -->
+          <mat-option [value]="sede.id" [disabled]="datos.sedeFija && sede.id !== datos.idSede">
+            {{ sede.nombre }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>Elegí una sede</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>Cancelar</button>
+    <button mat-flat-button type="submit" [disabled]="guardando()">Guardar</button>
+  </mat-dialog-actions>
+</form>
