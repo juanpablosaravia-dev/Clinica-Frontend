@@ -46,6 +46,8 @@ export class MisDatos implements OnInit {
   perfil = signal<Usuario | null>(null);
   coberturas = signal<Cobertura[]>([]);
   guardando = signal(false);
+  // Si falla la carga se guarda el mensaje, así la pantalla no queda cargando para siempre.
+  error = signal('');
 
   // La contraseña es opcional: si se deja vacía, no se cambia.
   formulario = this.fb.nonNullable.group(
@@ -71,7 +73,7 @@ export class MisDatos implements OnInit {
           id_cobertura: perfil.id_cobertura ?? 0,
         });
       },
-      error: (error) => this.snackBar.open(obtenerMensajeError(error), 'Cerrar', { duration: 5000 }),
+      error: (error) => this.error.set(obtenerMensajeError(error)),
     });
   }
 

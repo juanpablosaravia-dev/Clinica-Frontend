@@ -75,6 +75,11 @@
         <button mat-flat-button type="submit" [disabled]="guardando()">Guardar cambios</button>
       </mat-card-actions>
     </form>
+  } @else if (error()) {
+    <!-- Por ejemplo, backend apagado: se muestra el motivo en lugar de quedar cargando -->
+    <mat-card-content>
+      <p class="vacio">{{ error() }}</p>
+    </mat-card-content>
   } @else {
     <mat-card-content>
       <mat-progress-bar mode="indeterminate" />
