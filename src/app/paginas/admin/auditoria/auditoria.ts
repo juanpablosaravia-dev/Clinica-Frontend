@@ -19,6 +19,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 
 // Auditoría (admin): solo lectura. Filtros por usuario, entidad y rango de fechas.
 // El backend devuelve los registros más recientes primero; acá se paginan.
+// Conexión: AuditoriaService (GET /auditoria) y UsuarioService (GET /usuarios, para el filtro de usuario).
 @Component({
   selector: 'app-auditoria',
   imports: [

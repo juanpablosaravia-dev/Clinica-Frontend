@@ -9,6 +9,7 @@ import { fechaDeHoy } from '../../../utilidades/fechas';
 // "Mi agenda" del médico: por defecto la del día actual, con un selector de fecha.
 // La tabla y el alta/modificación/baja de rangos los resuelve el componente
 // reutilizable GestorAgenda. Esta página solo maneja la fecha elegida.
+// Conexión: hijo GestorAgenda, que usa AgendaService (GET, POST, PUT y DELETE /agenda) y el popup DialogoAgenda.
 @Component({
   selector: 'app-mi-agenda',
   imports: [MatCardModule, MatFormFieldModule, MatInputModule, GestorAgenda],

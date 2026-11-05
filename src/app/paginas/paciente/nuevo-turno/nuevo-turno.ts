@@ -10,6 +10,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 // "Nuevo turno" del paciente. Todo el paso a paso está en el componente
 // reutilizable SolicitudTurno; acá solo buscamos la cobertura del paciente
 // (para el resumen) y decidimos qué pasa cuando el turno se crea.
+// Conexión: AuthService (GET /auth/perfil, para la cobertura) · hijo: SolicitudTurno (POST /turnos).
 @Component({
   selector: 'app-nuevo-turno',
   imports: [MatCardModule, MatProgressBarModule, SolicitudTurno],

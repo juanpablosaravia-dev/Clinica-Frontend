@@ -33,6 +33,7 @@ interface MedicoElegido {
 // Agenda y turnos del operador.
 // Filtros de fecha (hoy) y sede (la suya). Las acciones (lápiz, ojo y "Nueva agenda")
 // solo están disponibles para la sede del operador: las demás se consultan, no se modifican.
+// Conexión: AgendaService (/agenda), TurnoService (GET /turnos/sede), MedicoService y SedeService · hijo: GestorAgenda · popup: DialogoConfirmacion.
 @Component({
   selector: 'app-agenda-turnos',
   imports: [

@@ -10,6 +10,7 @@ import { AuthService } from '../../../servicios/auth.service';
 // Asignar turno (operador): busca al paciente y le asigna un turno con el MISMO
 // flujo que "Nuevo turno" del paciente (componente SolicitudTurno), con la sede
 // fija en la del operador.
+// Conexión: hijos BuscadorPaciente (PacienteService: GET /pacientes) y SolicitudTurno (TurnoService: POST /turnos).
 @Component({
   selector: 'app-asignar-turno',
   imports: [MatCardModule, MatButtonModule, MatIconModule, BuscadorPaciente, SolicitudTurno],

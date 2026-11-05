@@ -13,6 +13,7 @@ import { obtenerMensajeError } from '../../utilidades/mensaje-error';
 // El trabajo de verdad lo hace AuthService.login(): pide el token, lo guarda en
 // localStorage y después trae el perfil. Esta pantalla solo valida el formulario
 // y muestra el resultado.
+// Conexión: AuthService (POST /auth/login y después GET /auth/perfil).
 @Component({
   selector: 'app-login',
   imports: [

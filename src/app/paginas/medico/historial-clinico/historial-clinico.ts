@@ -13,6 +13,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 // Historial clínico (médico): busca un paciente por DNI o apellido y muestra su
 // historial. El backend devuelve SOLO los registros de los turnos que atendió el
 // médico logueado, así que acá no hace falta filtrar nada.
+// Conexión: hijo BuscadorPaciente (PacienteService: GET /pacientes) y TurnoService (GET /historial/paciente/:id).
 @Component({
   selector: 'app-historial-clinico',
   imports: [DatePipe, MatCardModule, MatTableModule, MatProgressBarModule, BuscadorPaciente],

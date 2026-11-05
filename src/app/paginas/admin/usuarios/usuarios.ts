@@ -20,6 +20,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 
 // Gestión de usuarios (admin): listado paginado con filtros por nombre, apellido,
 // tipo de usuario y sede. Alta y edición en un diálogo.
+// Conexión: UsuarioService (GET, POST y PUT /usuarios) y SedeService (GET /sedes) · popup: DialogoUsuario (alta y edición).
 @Component({
   selector: 'app-usuarios',
   imports: [

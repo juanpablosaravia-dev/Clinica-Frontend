@@ -23,6 +23,7 @@ const validarPasswords: ValidatorFn = (grupo) => {
 
 // "Mis datos personales": muestra todo, pero solo se pueden modificar email,
 // contraseña, teléfono y cobertura. El resto se muestra en modo lectura.
+// Conexión: AuthService (GET y PUT /auth/perfil) y CoberturaService (GET /coberturas).
 @Component({
   selector: 'app-mis-datos',
   imports: [

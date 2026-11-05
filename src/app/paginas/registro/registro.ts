@@ -7,6 +7,7 @@ import { FormularioPaciente } from '../../componentes/formulario-paciente/formul
 // Registro público de pacientes.
 // Todo el formulario vive en el componente reutilizable FormularioPaciente;
 // esta página solo decide qué pasa cuando el registro sale bien.
+// Conexión: el formulario es FormularioPaciente, que usa AuthService (POST /auth/registro) y CoberturaService (GET /coberturas).
 @Component({
   selector: 'app-registro',
   imports: [RouterLink, MatButtonModule, FormularioPaciente],
