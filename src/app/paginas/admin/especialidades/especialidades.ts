@@ -18,6 +18,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 // ABM de especialidades (solo rol admin).
 // Funciona igual que la pantalla de sedes (ver sedes.ts, que está explicada paso a paso);
 // la única diferencia es que la especialidad tiene un solo campo: "descripcion".
+// Conexión: EspecialidadService (GET, POST, PUT y DELETE /especialidades) · popup: DialogoConfirmacion (para eliminar).
 @Component({
   selector: 'app-especialidades',
   imports: [

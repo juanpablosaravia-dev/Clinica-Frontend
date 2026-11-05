@@ -21,6 +21,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 
 // Turnos del médico para una fecha, en todas las sedes donde atiende.
 // Click en una fila: muestra las notas del paciente.
+// Conexión: TurnoService (GET /turnos/programados y PATCH /turnos/:id/cancelar) · popups: DialogoAtender (PATCH /turnos/:id/atender) y DialogoConfirmacion.
 @Component({
   selector: 'app-turnos-programados',
   imports: [
@@ -87,10 +88,13 @@ export class TurnosProgramados {
   atender(turno: Turno, evento: Event): void {
     // Evita que el click en el botón también "seleccione" la fila.
     evento.stopPropagation();
+    // Se abre el popup (componente DialogoAtender) y se le pasa el turno con "data".
+    // El popup es el que manda el PATCH al backend; esta página solo espera a que se cierre.
     this.dialog
       .open(DialogoAtender, { data: turno, width: '520px' })
       .afterClosed()
       .subscribe((atendido) => {
+        // afterClosed() devuelve lo que el popup respondió al cerrarse: true = se atendió.
         if (atendido) {
           this.cargarTurnos(this.fecha());
         }

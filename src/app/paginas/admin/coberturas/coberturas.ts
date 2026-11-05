@@ -18,6 +18,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 // ABM de coberturas (solo rol admin).
 // Funciona igual que la pantalla de sedes (ver sedes.ts, que está explicada paso a paso);
 // la cobertura tiene un solo campo: "nombre".
+// Conexión: CoberturaService (GET, POST, PUT y DELETE /coberturas) · popup: DialogoConfirmacion (para eliminar).
 @Component({
   selector: 'app-coberturas',
   imports: [

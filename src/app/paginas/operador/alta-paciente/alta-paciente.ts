@@ -4,6 +4,7 @@ import { FormularioPaciente } from '../../../componentes/formulario-paciente/for
 
 // Alta de pacientes del operador: MISMO formulario y validaciones que el registro
 // público, porque reutiliza el componente FormularioPaciente (no hay pantallas duplicadas).
+// Conexión: hijo FormularioPaciente, que usa AuthService (POST /auth/registro) y CoberturaService (GET /coberturas).
 @Component({
   selector: 'app-alta-paciente',
   imports: [FormularioPaciente],

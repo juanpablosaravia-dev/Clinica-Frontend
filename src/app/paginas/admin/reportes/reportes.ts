@@ -24,6 +24,7 @@ const COLORES = ['#1f7a70', '#f2c230', '#2e5eaa', '#c77d12', '#6b3fa0', '#14284b
 
 // Dashboard de reportes (admin). Un filtro de fechas actualiza los cuatro indicadores a la vez.
 // Gráficos con la librería Chart.js: turnos por especialidad (barras) y por sede (torta).
+// Conexión: ReporteService (GET /reportes/..., los 4 pedidos juntos con forkJoin).
 @Component({
   selector: 'app-reportes',
   imports: [

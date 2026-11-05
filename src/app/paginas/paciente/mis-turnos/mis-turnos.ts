@@ -15,6 +15,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 
 // "Mis turnos" del paciente: lista desplegable (mat-expansion-panel), del turno
 // más próximo al menos próximo. El estado se distingue con un chip de color.
+// Conexión: TurnoService (GET /turnos/mis-turnos y PATCH /turnos/:id/cancelar) · popup: DialogoConfirmacion.
 @Component({
   selector: 'app-mis-turnos',
   imports: [
@@ -56,6 +57,8 @@ export class MisTurnos implements OnInit {
   }
 
   cancelar(turno: Turno): void {
+    // Primero se abre el popup reutilizable DialogoConfirmacion (el "¿Está seguro?").
+    // Sus textos se le pasan en "data".
     this.dialog
       .open(DialogoConfirmacion, {
         data: {
@@ -66,6 +69,7 @@ export class MisTurnos implements OnInit {
       })
       .afterClosed()
       .subscribe((confirmado) => {
+        // "confirmado" es true si apretó "Sí" y false si apretó "No": con "No" no pasa nada.
         if (!confirmado) {
           return;
         }

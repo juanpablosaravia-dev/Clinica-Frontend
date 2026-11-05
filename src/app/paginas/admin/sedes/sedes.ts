@@ -21,6 +21,7 @@ import { obtenerMensajeError } from '../../../utilidades/mensaje-error';
 //  - esta clase (.ts): los datos y las funciones de la pantalla
 //  - el template (.html): lo que se ve, conectado a la clase
 //  - "imports": los componentes de Angular Material que usa el template
+// Conexión: SedeService (GET, POST, PUT y DELETE /sedes) · popup: DialogoConfirmacion (para eliminar).
 @Component({
   selector: 'app-sedes',
   imports: [
