@@ -62,8 +62,11 @@
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let turno" class="acciones">
               @if (turno.estado === 'confirmado') {
-                <!-- $event es el evento del click: se lo pasamos al método -->
-                <button mat-stroked-button (click)="atender(turno, $event)">Marcar como atendido</button>
+                <!-- Un turno de un día futuro todavía no se puede atender (el backend también lo rechaza) -->
+                @if (turno.fecha <= hoy) {
+                  <!-- $event es el evento del click: se lo pasamos al método -->
+                  <button mat-stroked-button (click)="atender(turno, $event)">Marcar como atendido</button>
+                }
                 <button mat-icon-button matTooltip="Cancelar turno" (click)="cancelar(turno, $event)">
                   <mat-icon>event_busy</mat-icon>
                 </button>
