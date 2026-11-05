@@ -45,6 +45,8 @@ export class TurnosProgramados {
   private snackBar = inject(MatSnackBar);
 
   fecha = signal(fechaDeHoy());
+  // Para mostrar "Marcar como atendido" solo en turnos de hoy o de días anteriores.
+  hoy = fechaDeHoy();
   // 0 = todas las sedes
   sedeFiltro = signal(0);
   turnos = signal<Turno[]>([]);
